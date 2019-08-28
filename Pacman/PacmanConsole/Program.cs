@@ -1,4 +1,5 @@
-﻿using PacmanLibrary;
+﻿using System;
+using PacmanLibrary;
 
 namespace PacmanConsole
 {
@@ -9,7 +10,6 @@ namespace PacmanConsole
             var game = new Game(new Board(new Pacman(Direction.Down), 10,10));
             
             game.Play();
-            
         }
     }
 }
