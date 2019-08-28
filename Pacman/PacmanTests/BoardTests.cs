@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
@@ -14,14 +13,12 @@ namespace PacmanTests
         {
             // Arrange
             var pacman = new Pacman(Direction.Up);
-            var cells = new List<ICell>()
-            {
-                new Cell(State.Empty),
-                new Cell(State.Empty),
-                new Cell(State.Empty),
-                new Cell(State.Empty), 
-            };
-            
+            var cells = new ICell[,]
+                {
+                    {new Cell(State.Empty), new Cell(State.Empty)},
+                    {new Cell(State.Empty), new Cell(State.Empty)}
+                };
+
             var board = new Board(pacman, cells, 2, 2);
  
             // Act
@@ -32,17 +29,37 @@ namespace PacmanTests
             {
                 Assert.Equal(State.Food, cell.State);
             }
+        }        
+        
+        [Fact]
+        public void SetUpPacman()
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Up);
+            var cells = new ICell[,]
+            {
+                {new Cell(State.Empty), new Cell(State.Empty)},
+                {new Cell(State.Empty), new Cell(State.Empty)}
+            };
+            var board = new Board(pacman, cells, 2, 2);
+            board.Initialise();
+ 
+            // Act
+            board.PlacePacman(0,0);
+             
+            // Assert
+            Assert.Equal(State.Pacman, board.Cells[0,0].State);
         }
     }
 
     public class Board
     {
         private readonly IPacman _pacman;
-        public readonly List<ICell> Cells;
+        public readonly ICell[,] Cells;
         private readonly int _rows;
         private readonly int _cols; 
 
-        public Board(IPacman pacman, List<ICell> cells, int rows, int cols)
+        public Board(IPacman pacman, ICell[,] cells, int rows, int cols)
         {
             _pacman = pacman;
             Cells = cells;
@@ -56,6 +73,11 @@ namespace PacmanTests
             {
                 cell.SetState(State.Food);
             }
+        }
+
+        public void PlacePacman(int row, int col)
+        {
+           Cells[row,col].SetState(State.Pacman);
         }
     }
 }
