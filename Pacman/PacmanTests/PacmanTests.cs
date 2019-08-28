@@ -1,39 +1,43 @@
+using PacmanLibrary;
 using Xunit;
 
 namespace PacmanTests
 {
     public class PacmanTests
     {
-        [Fact]
-        public void initialise_pacman()
+        [Theory]
+        [InlineData(Direction.Up, Direction.Down)]
+        [InlineData(Direction.Down, Direction.Down)]
+        [InlineData(Direction.Up, Direction.Left)]
+        [InlineData(Direction.Right, Direction.Right)]
+        public void initialise_pacman(Direction init, Direction change)
         {
             // Arrange
-            var pacman = new Pacman(Direction.Up);
+            var pacman = new Pacman(init);
             
             // Act
-            //pacman.SetDirecion(Direction.Down);
+            pacman.SetDirection(change);
 
             // Assert
-            Assert.Equal(Direction.Down, pacman.Direction);
-        }
-    }
-
-    public class Pacman
-    {
-        public Direction Direction { get; private set; }
-
-        public Pacman(Direction direction)
-        {
-            Direction = direction;
-        }
+            Assert.Equal(change, pacman.Direction);
+        }       
         
-    }
+        [Theory]
+        [InlineData(Direction.Up, Direction.Down, Direction.Right)]
+        [InlineData(Direction.Left, Direction.Down, Direction.Right)]
+        [InlineData(Direction.Up, Direction.Down, Direction.Down)]
+        [InlineData(Direction.Up, Direction.Down, Direction.Up)] 
+        public void change_pacman_direction_twice(Direction init, Direction firstChange, Direction change)
+        {
+            // Arrange
+            var pacman = new Pacman(init);
+            pacman.SetDirection(firstChange);
+            
+            // Act
+            pacman.SetDirection(change);
 
-    public enum Direction
-    {
-        Up,
-        Down,
-        Left, 
-        Right
+            // Assert
+            Assert.Equal(change, pacman.Direction);
+        }
     }
 }

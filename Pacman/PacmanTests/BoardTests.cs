@@ -1,4 +1,4 @@
-using System;
+using PacmanLibrary;
 using Xunit;
 
 namespace PacmanTests
@@ -8,6 +8,7 @@ namespace PacmanTests
         [Fact]
         public void SetUpBoard()
         {
+            var pacman = new Pacman(Direction.Down);
         }
     }
 }
