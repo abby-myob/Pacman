@@ -1,3 +1,5 @@
+using PacmanLibrary.Interfaces;
+
 namespace PacmanLibrary
 {
     public class Pacman : IPacman

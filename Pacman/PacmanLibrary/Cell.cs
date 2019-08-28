@@ -2,18 +2,18 @@ using PacmanLibrary.Enums;
 
 namespace PacmanLibrary
 {
-    public class Cell
+    public class Cell : ICell
     {
-        public CellState CellState { get; private set; }
+        public State State { get; private set; }
 
-        public Cell(CellState cellState)
+        public Cell(State state)
         {
-            CellState = cellState;
+            State = state;
         }
 
-        public void SetState(CellState cellState)
+        public void SetState(State state)
         {
-            CellState = cellState;
+            State = state;
         }
     }
 }

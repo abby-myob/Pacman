@@ -7,11 +7,11 @@ namespace PacmanTests
     public class CellTests
     {
         [Theory]
-        [InlineData(CellState.Food, CellState.Empty)]
-        [InlineData(CellState.Empty, CellState.Empty)]
-        [InlineData(CellState.Empty, CellState.Food)]
-        [InlineData(CellState.Food, CellState.Food)]
-        public void init_Cell(CellState init, CellState change)
+        [InlineData(State.Food, State.Empty)]
+        [InlineData(State.Empty, State.Empty)]
+        [InlineData(State.Empty, State.Food)]
+        [InlineData(State.Food, State.Food)]
+        public void init_Cell(State init, State change)
         {
             // Arrange 
             var cell = new Cell(init);
@@ -20,7 +20,7 @@ namespace PacmanTests
             cell.SetState(change);
 
             // Assert
-            Assert.Equal(change, cell.CellState);
+            Assert.Equal(change, cell.State);
         }
     }
 }

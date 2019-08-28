@@ -1,6 +1,6 @@
 namespace PacmanLibrary.Enums
 {
-    public enum CellState
+    public enum State
     {
         Food,
         Empty

@@ -1,4 +1,4 @@
-namespace PacmanLibrary
+namespace PacmanLibrary.Interfaces
 {
     public interface IPacman
     {
