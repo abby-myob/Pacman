@@ -126,7 +126,26 @@ namespace PacmanTests
         
         [Theory] 
         [InlineData(2, 2, Direction.Left, 1,1," .  . \n >    \n")]
-        public void check_output_string_is_correct_for_rows_and_cols_and_placement_dof_pacman(int rows, int cols,
+        public void move_pacman_and_check_pacman_is_in_right_place(int rows, int cols,
+            Direction direction, int pacRow, int pacCol, string expected)
+        {
+            // Arrange
+            var pacman = new Pacman(direction);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            board.PlacePacman(pacRow, pacCol); 
+
+            // Act
+            board.MovePacman();
+
+            // Assert
+            Assert.Equal(expected, board.BoardStateToString());
+        }
+            
+        [Theory] 
+        [InlineData(2, 2, Direction.Left, 1,0," .  . \n    > \n")]
+        [InlineData(2, 2, Direction.Up, 0,0,"    . \n v  . \n")]
+        public void move_pacman_and_check_it_overlaps_the_board(int rows, int cols,
             Direction direction, int pacRow, int pacCol, string expected)
         {
             // Arrange

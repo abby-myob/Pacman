@@ -7,14 +7,14 @@ namespace PacmanLibrary
 {
     public class Board : IBoard
     {
-        private readonly IPacman _pacman;
+        public IPacman Pacman { get; }
         public ICell[,] Cells { get; }
         private readonly int _totalRows;
         private readonly int _totalCols;
 
         public Board(IPacman pacman, int totalRows, int totalCols)
         {
-            _pacman = pacman;
+            Pacman = pacman;
             if (totalRows < 1 || totalCols < 1) throw new ArgumentException("Array size must be greater or equal to 1");
             _totalRows = totalRows;
             _totalCols = totalCols;
@@ -43,8 +43,54 @@ namespace PacmanLibrary
 
         public void PlacePacman(int row, int column)
         {
-            _pacman.SetLocation(row, column);
+            Pacman.SetLocation(row, column);
             Cells[row, column].SetState(State.Pacman);
+        }
+
+        public void MovePacman()
+        {
+            Cells[Pacman.Row, Pacman.Column].SetState(State.Empty);
+
+            int newPacmanRow = Pacman.Row, newPacmanCol = Pacman.Column;
+
+            switch (Pacman.Direction)
+            {
+                case Direction.Down:
+                    newPacmanRow++;
+                    break;
+                case Direction.Up:
+                    newPacmanRow--;
+                    break;
+                case Direction.Left:
+                    newPacmanCol--;
+                    break;
+                case Direction.Right:
+                    newPacmanCol++;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            newPacmanRow = CheckInBounds(true, newPacmanRow);
+            newPacmanCol = CheckInBounds(false, newPacmanCol);
+
+            PlacePacman(newPacmanRow, newPacmanCol);
+        }
+
+        private int CheckInBounds(bool isRow, int index)
+        {
+            if (isRow)
+            {
+                if (index >= _totalRows) return 0;
+                if (index < 0) return _totalRows - 1;
+            }
+            else
+            {
+                if (index >= _totalCols) return 0;
+                if (index < 0) return _totalCols - 1;
+            }
+
+            return index;
         }
 
         public string BoardStateToString()
@@ -64,7 +110,7 @@ namespace PacmanLibrary
                             stringBuilder.Append(" . ");
                             break;
                         case State.Pacman:
-                            switch (_pacman.Direction)
+                            switch (Pacman.Direction)
                             {
                                 case Direction.Up:
                                     stringBuilder.Append(" v ");
@@ -92,33 +138,6 @@ namespace PacmanLibrary
             }
 
             return stringBuilder.ToString();
-        }
-
-        public void MovePacman()
-        {
-            Cells[_pacman.Row, _pacman.Column].SetState(State.Empty);
-
-            int newPacmanRow = _pacman.Row, newPacmanCol = _pacman.Column;
-
-            switch (_pacman.Direction)
-            {
-                case Direction.Down:
-                    newPacmanRow++;
-                    break;
-                case Direction.Up:
-                    newPacmanRow--;
-                    break;
-                case Direction.Left:
-                    newPacmanCol--;
-                    break;
-                case Direction.Right:
-                    newPacmanCol++;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-             
-            PlacePacman(newPacmanRow, newPacmanCol); 
         }
     }
 }

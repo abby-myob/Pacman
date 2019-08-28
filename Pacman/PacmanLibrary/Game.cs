@@ -1,5 +1,6 @@
 using System;
 using PacmanLibrary.Interfaces;
+using System.Linq;
 
 namespace PacmanLibrary
 {
@@ -16,12 +17,13 @@ namespace PacmanLibrary
         {
             _board.Initialise();
             _board.PlacePacman(0,0);
+        }
 
-            Console.WriteLine(_board.BoardStateToString());
+        public bool IsGameOver()
+        {
+            //_board.Cells.Count(c => c.State ==);
 
-            _board.MovePacman();
-            Console.WriteLine(_board.BoardStateToString());
-
+            return true;
         }
     }
 }
