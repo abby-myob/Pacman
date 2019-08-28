@@ -1,6 +1,8 @@
 using System;
-using PacmanLibrary.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
+using PacmanLibrary.Enums;
+using PacmanLibrary.Interfaces; 
 
 namespace PacmanLibrary
 {
@@ -20,10 +22,8 @@ namespace PacmanLibrary
         }
 
         public bool IsGameOver()
-        {
-            //_board.Cells.Count(c => c.State ==);
-
-            return true;
+        { 
+            return _board.Cells.Cast<ICell>().All(cell => cell.State != State.Food);
         }
     }
 }
