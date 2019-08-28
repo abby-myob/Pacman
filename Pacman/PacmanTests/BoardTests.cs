@@ -1,3 +1,4 @@
+using System;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
 using Xunit;
@@ -25,6 +26,7 @@ namespace PacmanTests
         [Theory]
         [InlineData(2, 3)]
         [InlineData(10, 10)]
+        [InlineData(200, 10)] 
         public void Cells_array_should_have_correct_rows_and_cols_length_from_input(int rows, int cols)
         {
             // Arrange
@@ -36,7 +38,22 @@ namespace PacmanTests
             // Assert
             Assert.Equal(rows, board.Cells.GetLength(0));
             Assert.Equal(cols, board.Cells.GetLength(1));
-        }
+        }        
+        
+        [Theory] 
+        [InlineData(0, 4)]
+        [InlineData(0, -10)]
+        [InlineData(20, -10)]
+
+        public void Cells_array_should_throw_exception_when_invalid_rows_and_cols_are_inputted(int rows, int cols)
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Up); 
+            //act
+            void Act() => new Board(pacman, rows, cols);
+            //assert
+            Assert.Throws<ArgumentException>(Act);
+        } 
 
         [Fact]
         public void When_initialisation_method_of_board_is_called_all_cells_should_have_food()

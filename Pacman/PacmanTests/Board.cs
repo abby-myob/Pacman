@@ -1,3 +1,4 @@
+using System;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
@@ -14,7 +15,7 @@ namespace PacmanTests
         public Board(IPacman pacman, int rows, int cols)
         {
             _pacman = pacman;
-            
+            if (rows < 1 || cols < 1) throw new ArgumentException("Array size must be greater or equal to 1");
             _rows = rows;
             _cols = cols;  
             Cells = new ICell[rows,cols];
