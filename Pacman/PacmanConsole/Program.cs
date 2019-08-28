@@ -1,4 +1,5 @@
 ﻿using System;
+using PacmanLibrary;
 
 namespace PacmanConsole
 {
@@ -6,7 +7,9 @@ namespace PacmanConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var game = new Game(new Board(new Pacman(Direction.Down), 40,40));
+            
+            game.Play();
         }
     }
 }

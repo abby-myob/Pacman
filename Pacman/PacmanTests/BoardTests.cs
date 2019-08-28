@@ -26,7 +26,7 @@ namespace PacmanTests
         [Theory]
         [InlineData(2, 3)]
         [InlineData(10, 10)]
-        [InlineData(200, 10)] 
+        [InlineData(200, 10)]
         public void Cells_array_should_have_correct_rows_and_cols_length_from_input(int rows, int cols)
         {
             // Arrange
@@ -38,22 +38,22 @@ namespace PacmanTests
             // Assert
             Assert.Equal(rows, board.Cells.GetLength(0));
             Assert.Equal(cols, board.Cells.GetLength(1));
-        }        
-        
-        [Theory] 
+        }
+
+        [Theory]
         [InlineData(0, 4)]
         [InlineData(0, -10)]
         [InlineData(20, -10)]
-
         public void Cells_array_should_throw_exception_when_invalid_rows_and_cols_are_inputted(int rows, int cols)
         {
             // Arrange
-            var pacman = new Pacman(Direction.Up); 
+            var pacman = new Pacman(Direction.Up);
+
             //act
             void Act() => new Board(pacman, rows, cols);
             //assert
             Assert.Throws<ArgumentException>(Act);
-        } 
+        }
 
         [Fact]
         public void When_initialisation_method_of_board_is_called_all_cells_should_have_food()
@@ -85,6 +85,43 @@ namespace PacmanTests
 
             // Assert
             Assert.Equal(State.Pacman, board.Cells[0, 0].State);
+        }
+
+        [Fact]
+        public void output_a_string_of_the_board_state()
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Up);
+            var board = new Board(pacman, 2, 2);
+            board.Initialise();
+            var expected = "..\n..\n";
+
+            // Act
+            var boardState = board.BoardStateToString();
+
+            // Assert
+            Assert.Equal(expected, boardState);
+        }
+
+        [Theory]
+        [InlineData(2, 2, Direction.Up, 0,0,"v.\n..\n")]
+        [InlineData(1, 1, Direction.Down, 0,0,"^\n")]
+        [InlineData(3, 4, Direction.Right, 1,0,"....\n<...\n....\n")]
+        [InlineData(2, 2, Direction.Left, 1,1,"..\n.>\n")]
+        public void check_output_string_is_correct_for_rows_and_cols_and_placement_of_pacman(int rows, int cols,
+            Direction direction, int pacRow, int pacCol, string expected)
+        {
+            // Arrange
+            var pacman = new Pacman(direction);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            board.PlacePacman(pacRow, pacCol); 
+
+            // Act
+            var boardState = board.BoardStateToString();
+
+            // Assert
+            Assert.Equal(expected, boardState);
         }
     }
 }

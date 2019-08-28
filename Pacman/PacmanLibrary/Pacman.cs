@@ -1,3 +1,4 @@
+using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
 namespace PacmanLibrary
