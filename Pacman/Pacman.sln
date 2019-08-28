@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanConsole", "PacmanConsole\PacmanConsole.csproj", "{7D7DB2F1-3AB2-4AC9-885C-94BB543D6D3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanLibrary", "PacmanLibrary\PacmanLibrary.csproj", "{96D387BE-186F-4C6A-8985-961C290E4E28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanTests", "PacmanTests\PacmanTests.csproj", "{4AD262BE-04F1-44A9-BAB2-DD020A36F667}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D7DB2F1-3AB2-4AC9-885C-94BB543D6D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7DB2F1-3AB2-4AC9-885C-94BB543D6D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7DB2F1-3AB2-4AC9-885C-94BB543D6D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7DB2F1-3AB2-4AC9-885C-94BB543D6D3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D387BE-186F-4C6A-8985-961C290E4E28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D387BE-186F-4C6A-8985-961C290E4E28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D387BE-186F-4C6A-8985-961C290E4E28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D387BE-186F-4C6A-8985-961C290E4E28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD262BE-04F1-44A9-BAB2-DD020A36F667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD262BE-04F1-44A9-BAB2-DD020A36F667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD262BE-04F1-44A9-BAB2-DD020A36F667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD262BE-04F1-44A9-BAB2-DD020A36F667}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
