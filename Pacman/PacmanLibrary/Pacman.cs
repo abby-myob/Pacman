@@ -1,6 +1,6 @@
 namespace PacmanLibrary
 {
-    public class Pacman
+    public class Pacman : IPacman
     {
         public Direction Direction { get; private set; }
 
