@@ -1,6 +1,6 @@
 using PacmanLibrary.Enums;
 
-namespace PacmanLibrary
+namespace PacmanLibrary.Interfaces
 {
     public interface ICell
     {
