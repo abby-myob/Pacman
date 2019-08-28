@@ -118,8 +118,7 @@ namespace PacmanLibrary
                     throw new ArgumentOutOfRangeException();
             }
              
-            _pacman.SetLocation(newPacmanRow, newPacmanCol);
-            Cells[newPacmanRow, newPacmanRow].SetState(State.Pacman);
+            PlacePacman(newPacmanRow, newPacmanCol); 
         }
     }
 }

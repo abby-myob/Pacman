@@ -125,7 +125,7 @@ namespace PacmanTests
         }
         
         [Theory] 
-        [InlineData(2, 2, Direction.Left, 1,1," .  . \n >  . \n")]
+        [InlineData(2, 2, Direction.Left, 1,1," .  . \n >    \n")]
         public void check_output_string_is_correct_for_rows_and_cols_and_placement_dof_pacman(int rows, int cols,
             Direction direction, int pacRow, int pacCol, string expected)
         {
