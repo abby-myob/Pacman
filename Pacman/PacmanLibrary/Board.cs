@@ -57,25 +57,25 @@ namespace PacmanLibrary
                     switch (state)
                     {
                         case State.Empty:
-                            stringBuilder.Append(" ");
+                            stringBuilder.Append("   ");
                             break;
                         case State.Food:
-                            stringBuilder.Append(".");
+                            stringBuilder.Append(" . ");
                             break;
                         case State.Pacman:
                             switch (_pacman.Direction)
                             {
                                 case Direction.Up:
-                                    stringBuilder.Append("v");
+                                    stringBuilder.Append(" v ");
                                     break;
                                 case Direction.Down:
-                                    stringBuilder.Append("^");
+                                    stringBuilder.Append(" ^ ");
                                     break;
                                 case Direction.Left:
-                                    stringBuilder.Append(">");
+                                    stringBuilder.Append(" > ");
                                     break;
                                 case Direction.Right:
-                                    stringBuilder.Append("<");
+                                    stringBuilder.Append(" < ");
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -91,6 +91,11 @@ namespace PacmanLibrary
             }
 
             return stringBuilder.ToString();
+        }
+
+        public void MovePacman()
+        {
+            Cells.Get
         }
     }
 }

@@ -1,4 +1,4 @@
-using PacmanLibrary.Enums;
+using System.Reflection;
 using PacmanLibrary.Interfaces;
 
 namespace PacmanLibrary
@@ -15,6 +15,11 @@ namespace PacmanLibrary
         public void SetDirection(Direction newDirection)
         {
             Direction = newDirection;
+        }
+
+        public void SetLocation(Location location)
+        {
+            
         }
     }
 }

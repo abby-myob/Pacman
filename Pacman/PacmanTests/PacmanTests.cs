@@ -39,5 +39,23 @@ namespace PacmanTests
             // Assert
             Assert.Equal(change, pacman.Direction);
         }
+        
+        [Theory]
+        [InlineData(Direction.Up, Direction.Down, Direction.Right)]
+        [InlineData(Direction.Left, Direction.Down, Direction.Right)]
+        [InlineData(Direction.Up, Direction.Down, Direction.Down)]
+        [InlineData(Direction.Up, Direction.Down, Direction.Up)] 
+        public void set_Location_of_pacman_check_it_works(Direction init, Direction firstChange, Direction change)
+        {
+            // Arrange
+            var pacman = new Pacman(init);
+            pacman.SetDirection(firstChange);
+            
+            // Act
+            pacman.SetDirection(change);
+
+            // Assert
+            Assert.Equal(change, pacman.Direction);
+        }
     }
 }

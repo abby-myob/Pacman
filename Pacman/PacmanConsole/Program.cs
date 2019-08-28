@@ -1,13 +1,12 @@
-﻿using System;
-using PacmanLibrary;
+﻿using PacmanLibrary;
 
 namespace PacmanConsole
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            var game = new Game(new Board(new Pacman(Direction.Down), 40,40));
+            var game = new Game(new Board(new Pacman(Direction.Down), 10,10));
             
             game.Play();
         }

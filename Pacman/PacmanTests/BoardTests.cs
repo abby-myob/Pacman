@@ -94,7 +94,7 @@ namespace PacmanTests
             var pacman = new Pacman(Direction.Up);
             var board = new Board(pacman, 2, 2);
             board.Initialise();
-            var expected = "..\n..\n";
+            var expected = " .  . \n .  . \n";
 
             // Act
             var boardState = board.BoardStateToString();
@@ -104,10 +104,10 @@ namespace PacmanTests
         }
 
         [Theory]
-        [InlineData(2, 2, Direction.Up, 0,0,"v.\n..\n")]
-        [InlineData(1, 1, Direction.Down, 0,0,"^\n")]
-        [InlineData(3, 4, Direction.Right, 1,0,"....\n<...\n....\n")]
-        [InlineData(2, 2, Direction.Left, 1,1,"..\n.>\n")]
+        [InlineData(2, 2, Direction.Up, 0,0," v  . \n .  . \n")]
+        [InlineData(1, 1, Direction.Down, 0,0," ^ \n")]
+        [InlineData(3, 4, Direction.Right, 1,0," .  .  .  . \n <  .  .  . \n .  .  .  . \n")]
+        [InlineData(2, 2, Direction.Left, 1,1," .  . \n .  > \n")]
         public void check_output_string_is_correct_for_rows_and_cols_and_placement_of_pacman(int rows, int cols,
             Direction direction, int pacRow, int pacCol, string expected)
         {
@@ -122,6 +122,24 @@ namespace PacmanTests
 
             // Assert
             Assert.Equal(expected, boardState);
+        }
+        
+        [Theory] 
+        [InlineData(2, 2, Direction.Left, 1,1," .  . \n >  . \n")]
+        public void check_output_string_is_correct_for_rows_and_cols_and_placement_dof_pacman(int rows, int cols,
+            Direction direction, int pacRow, int pacCol, string expected)
+        {
+            // Arrange
+            var pacman = new Pacman(direction);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            board.PlacePacman(pacRow, pacCol); 
+
+            // Act
+            board.MovePacman();
+
+            // Assert
+            Assert.Equal(expected, board.BoardStateToString());
         }
     }
 }
