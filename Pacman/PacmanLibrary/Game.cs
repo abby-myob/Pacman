@@ -18,6 +18,10 @@ namespace PacmanLibrary
             _board.PlacePacman(0,0);
 
             Console.WriteLine(_board.BoardStateToString());
+
+            _board.MovePacman();
+            Console.WriteLine(_board.BoardStateToString());
+
         }
     }
 }

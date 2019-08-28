@@ -6,6 +6,8 @@ namespace PacmanLibrary
     public class Pacman : IPacman
     {
         public Direction Direction { get; private set; }
+        public int Row { get; private set; }
+        public int Column { get; private set; }
 
         public Pacman(Direction direction)
         {
@@ -17,9 +19,10 @@ namespace PacmanLibrary
             Direction = newDirection;
         }
 
-        public void SetLocation(Location location)
+        public void SetLocation(int row, int column)
         {
-            
+            Row = row;
+            Column = column;
         }
     }
 }

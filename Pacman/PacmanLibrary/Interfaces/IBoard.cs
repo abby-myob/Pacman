@@ -6,5 +6,6 @@ namespace PacmanLibrary.Interfaces
         void Initialise();
         void PlacePacman(int row, int col);
         string BoardStateToString();
+        void MovePacman();
     }
 }
