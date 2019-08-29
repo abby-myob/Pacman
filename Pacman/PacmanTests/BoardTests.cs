@@ -142,23 +142,26 @@ namespace PacmanTests
 //            Assert.Equal(expected, board.BoardStateToString());
 //        }
 //            
-//        [Theory] 
-//        [InlineData(2, 2, Direction.Left, 1,0," .  . \n    > \n")]
-//        [InlineData(2, 2, Direction.Up, 0,0,"    . \n v  . \n")]
-//        public void move_pacman_and_check_it_overlaps_the_board(int rows, int cols,
-//            Direction direction, int pacRow, int pacCol, string expected)
-//        {
-//            // Arrange
-//            var pacman = new Pacman(direction);
-//            var board = new Board(pacman, rows, cols);
-//            board.Initialise();
-//            board.PlacePacman(pacRow, pacCol); 
-//
-//            // Act
-//            board.MovePacman();
-//
-//            // Assert
-//            Assert.Equal(expected, board.BoardStateToString());
-//        }
+        [Theory]  
+        [InlineData(2, 2, Direction.Up, 0,0,1,0)]
+        [InlineData(2, 2, Direction.Left, 0,0,0,1)]
+        [InlineData(2, 2, Direction.Down, 1,1,0,1)]
+        [InlineData(2, 2, Direction.Right, 1,1,1,0)]
+        public void move_pacman_and_check_it_overlaps_the_board(int rows, int cols,
+            Direction direction, int pacRow, int pacCol, int expectedRow, int expectedCol)
+        {
+            // Arrange
+            var pacman = new Pacman(direction);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            board.PlacePacman(pacRow, pacCol); 
+
+            // Act
+            board.MovePacman();
+
+            // Assert
+            Assert.Equal(expectedRow, board.Pacman.Row);
+            Assert.Equal(expectedCol, board.Pacman.Column);
+        }
     }
 }
