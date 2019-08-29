@@ -14,10 +14,9 @@ namespace PacmanTests
         {
             // Arrange
             var boardMock = new Mock<IBoard>();
-            var game = new Game(boardMock.Object);
-            
+
             // Act
-            game.Play(new ConsolePrinter());
+            var game = new Game(boardMock.Object);
             
             // Assert
             boardMock.Verify(b => b.Initialise(), Times.Once);
@@ -28,10 +27,9 @@ namespace PacmanTests
         {
             // Arrange
             var boardMock = new Mock<IBoard>();
-            var game = new Game(boardMock.Object);
             
             // Act
-            game.Play(new ConsolePrinter());
+            var game = new Game(boardMock.Object);
 
             
             // Assert
@@ -39,14 +37,14 @@ namespace PacmanTests
         }
         
         [Fact]  
-        public void is_Game_over_check_should_return_true_as_all_cells_are_empty()
+        public void isGameOver_check_should_return_true_as_all_cells_are_empty()
         {
             // Arrange
             var pacman = new Pacman(Direction.Down);
-            var board = new Board(pacman, 20,20);
-            board.PlacePacman(2,2); 
-            var game = new Game(board);
-
+            var board = new Board(pacman, 1,1);
+            board.PlacePacman(0,0); 
+            var game = new Game(board); 
+            
             // Act
             var isGameOver = game.IsGameOver();
 
@@ -69,6 +67,22 @@ namespace PacmanTests
 
             // Assert
             Assert.False(isGameOver);
+        }
+        
+                
+        [Fact]  
+        public void check_That_Scoring_is_set_at_0()
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Down);
+            var board = new Board(pacman, 20,20); 
+            var game = new Game(board);
+
+            // Act
+            var score = game.Score;
+
+            // Assert
+            Assert.Equal(0, score);
         }
     }
 }

@@ -6,9 +6,9 @@ using PacmanLibrary.Interfaces;
 
 namespace PacmanConsole
 {
-    public class ConsolePrinter : IPrinter
+    public class ConsoleResponseManager : IResponseManager
     {
-        
+
         public void PrintBoard(ICell[,] cells, IPacman pacman)
         {
             var stringBuilder = new StringBuilder();
@@ -55,6 +55,23 @@ namespace PacmanConsole
 
             Console.WriteLine(stringBuilder.ToString());
         }
-        
+
+        public Direction GetDirection()
+        {
+            var key = Console.ReadKey(false).Key;
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    return Direction.Up;
+                case ConsoleKey.DownArrow:
+                    return Direction.Down;
+                case ConsoleKey.LeftArrow:
+                    return Direction.Left;
+                case ConsoleKey.RightArrow:
+                    return Direction.Right;
+                default:
+                    return Direction.Null;
+            } 
+        }
     }
 }

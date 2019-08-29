@@ -1,5 +1,5 @@
-﻿using System;
-using PacmanLibrary;
+﻿using PacmanLibrary;
+using PacmanLibrary.Enums;
 
 namespace PacmanConsole
 {
@@ -7,9 +7,9 @@ namespace PacmanConsole
     {
         private static void Main()
         {
-            var game = new Game(new Board(new Pacman(Direction.Down), 10,10));
+            var game = new Game(new Board(new Pacman(Direction.Down), 3,3));
             
-            game.Play(new ConsolePrinter());
+            game.Play(new ConsoleResponseManager());
         }
     }
 }

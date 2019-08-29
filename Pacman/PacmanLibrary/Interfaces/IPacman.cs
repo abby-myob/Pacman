@@ -1,3 +1,5 @@
+using PacmanLibrary.Enums;
+
 namespace PacmanLibrary.Interfaces
 {
     public interface IPacman

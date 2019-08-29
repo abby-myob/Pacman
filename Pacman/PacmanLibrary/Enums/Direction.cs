@@ -1,10 +1,11 @@
-namespace PacmanLibrary
+namespace PacmanLibrary.Enums
 {
     public enum Direction
     {
         Up,
         Down,
         Left, 
-        Right
+        Right,
+        Null
     }
 }

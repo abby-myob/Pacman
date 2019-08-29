@@ -1,5 +1,6 @@
 using System.Configuration;
 using PacmanLibrary;
+using PacmanLibrary.Enums;
 using Xunit;
 
 namespace PacmanTests
