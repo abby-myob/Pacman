@@ -8,16 +8,16 @@ namespace PacmanLibrary
 {
     public class Game
     {
-        private readonly IBoard _board;
+        public IBoard Board;
         private IResponseManager _responseManager;
         public int Score;
 
         public Game(IBoard board)
         {
-            _board = board;
+            Board = board;
             Score = 0;
-            _board.Initialise();
-            _board.PlacePacman(0, 0);
+            Board.Initialise();
+            Board.PlacePacman(0, 0);
         }
 
         public void Play(IResponseManager responseManager)
@@ -35,16 +35,16 @@ namespace PacmanLibrary
                 switch (direction)
                 {
                     case Direction.Up:
-                        _board.Pacman.SetDirection(Direction.Up);
+                        Board.Pacman.SetDirection(Direction.Up);
                         break;
                     case Direction.Down:
-                        _board.Pacman.SetDirection(Direction.Down);
+                        Board.Pacman.SetDirection(Direction.Down);
                         break;
                     case Direction.Left:
-                        _board.Pacman.SetDirection(Direction.Left);
+                        Board.Pacman.SetDirection(Direction.Left);
                         break;
                     case Direction.Right:
-                        _board.Pacman.SetDirection(Direction.Right);
+                        Board.Pacman.SetDirection(Direction.Right);
                         break;
                     case Direction.Null:
                         break;
@@ -56,13 +56,13 @@ namespace PacmanLibrary
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            _board.MovePacman();
-            _responseManager.PrintBoard(_board.Cells, _board.Pacman);
+            Board.MovePacman();
+            _responseManager.PrintBoard(Board.Cells, Board.Pacman);
         }
 
         public bool IsGameOver()
         {
-            return _board.Cells.Cast<ICell>().All(cell => cell.State != State.Food);
+            return Board.Cells.Cast<ICell>().All(cell => cell.State != State.Food);
         }
     }
 }

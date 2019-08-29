@@ -71,18 +71,20 @@ namespace PacmanTests
         
                 
         [Fact]  
-        public void check_That_Scoring_is_set_at_0()
+        public void check_score_is_10_with_move_of_pacman()
         {
             // Arrange
             var pacman = new Pacman(Direction.Down);
             var board = new Board(pacman, 20,20); 
+            board.MovePacman();
             var game = new Game(board);
+            game.Board.MovePacman();
 
             // Act
             var score = game.Score;
 
             // Assert
-            Assert.Equal(0, score);
+            Assert.Equal(10, score);
         }
     }
 }
