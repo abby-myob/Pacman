@@ -15,44 +15,38 @@ namespace PacmanLibrary
             _board = board; 
         }
 
-        public void Play()
+        public void Play(IPrinter printer)
         {
             _board.Initialise();
             _board.PlacePacman(0,0);
 
-            for (int i = 0; i < 80; i++)
+            while(!IsGameOver())
             {
-                Console.WriteLine(_board.BoardStateToString());
-                _board.MovePacman();
-                
-//                var fade1 = 1000;
-//                while (fade1 != -1)
+                printer.PrintBoard(_board.Cells, _board.Pacman);
+
+
+//                var ch = Console.ReadKey(false).Key;
+//                switch(ch)
 //                {
-//                    await Task.Delay(30);
-//                    fade1--;
+//                    case ConsoleKey.UpArrow:
+//                        _board.Pacman.SetDirection(Direction.Up); 
+//                        break;
+//                    case ConsoleKey.DownArrow:
+//                        _board.Pacman.SetDirection(Direction.Down); 
+//                        break;
+//                    case ConsoleKey.LeftArrow:
+//                        _board.Pacman.SetDirection(Direction.Left); 
+//                        break;
+//                    case ConsoleKey.RightArrow:
+//                        _board.Pacman.SetDirection(Direction.Right); 
+//                        break;
 //                }
                 
-                var ch = Console.ReadKey(false).Key;
-                switch(ch)
-                {
-                    case ConsoleKey.UpArrow:
-                        _board.Pacman.SetDirection(Direction.Up);
-                        Console.WriteLine(_board.BoardStateToString());
-                        break;
-                    case ConsoleKey.DownArrow:
-                        _board.Pacman.SetDirection(Direction.Down);
-                        Console.WriteLine(_board.BoardStateToString());
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        _board.Pacman.SetDirection(Direction.Left);
-                        Console.WriteLine(_board.BoardStateToString());
-                        break;
-                    case ConsoleKey.RightArrow:
-                        _board.Pacman.SetDirection(Direction.Right);
-                        Console.WriteLine(_board.BoardStateToString());
-                        break;
-                }
+                _board.MovePacman();
             }
+            
+            printer.PrintBoard(_board.Cells, _board.Pacman);
+
         }
 
         public bool IsGameOver()

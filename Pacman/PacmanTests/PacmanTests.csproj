@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PacmanConsole\PacmanConsole.csproj" />
       <ProjectReference Include="..\PacmanLibrary\PacmanLibrary.csproj" />
     </ItemGroup>
 

@@ -1,4 +1,5 @@
 using Moq;
+using PacmanConsole;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
@@ -16,7 +17,7 @@ namespace PacmanTests
             var game = new Game(boardMock.Object);
             
             // Act
-            game.Play();
+            game.Play(new ConsolePrinter());
             
             // Assert
             boardMock.Verify(b => b.Initialise(), Times.Once);
@@ -30,7 +31,8 @@ namespace PacmanTests
             var game = new Game(boardMock.Object);
             
             // Act
-            game.Play();
+            game.Play(new ConsolePrinter());
+
             
             // Assert
             boardMock.Verify(b => b.PlacePacman(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
