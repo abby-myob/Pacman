@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
@@ -36,25 +37,25 @@ namespace PacmanLibrary
 
         public void Initialise()
         {
-            foreach (var cell in Cells)
-            {
-                cell.SetState(State.Food);
-            }
-
-//            for (var i = 0; i < _totalRows; i++)
+//            foreach (var cell in Cells)
 //            {
-//                for (var j = 0; j < _totalCols; j++)
-//                {
-//                    if (i == 0 || i == _totalRows - 1)
-//                    {
-//                        Cells[i, j] = new Cell(State.Wall);
-//                    }
-//                    else
-//                    {
-//                        Cells[i, j] = new Cell(State.Food);
-//                    }
-//                }
+//                cell.SetState(State.Food);
 //            }
+
+            for (var i = 0; i < _totalRows; i++)
+            {
+                for (var j = 0; j < _totalCols; j++)
+                {
+                    if (i == 0 || i == _totalRows - 1)
+                    {
+                        Cells[i, j] = new Cell(State.Wall);
+                    }
+                    else
+                    {
+                        Cells[i, j] = new Cell(State.Food);
+                    }
+                }
+            }
         }
 
         public void PlacePacman(int row, int column)
@@ -66,10 +67,27 @@ namespace PacmanLibrary
 
         public void MovePacman()
         {
+            var newCoord = NextCell(Pacman.Direction);
+
+            var newPacmanRow = CheckInBounds(true, newCoord[0]);
+            var newPacmanCol = CheckInBounds(false, newCoord[1]);
+
+            
+            IsNextCellFood = Cells[newPacmanRow, newPacmanCol].State == State.Food;
+
+            if (Cells[newPacmanRow, newPacmanCol].State == State.Wall) return;
+
+            Cells[Pacman.Row, Pacman.Column].SetState(State.Empty); 
+            
+            PlacePacman(newPacmanRow, newPacmanCol);
+        }
+
+        private int[] NextCell(Direction direction)
+        {
             var newPacmanRow = Pacman.Row;
             var newPacmanCol = Pacman.Column;
 
-            switch (Pacman.Direction)
+            switch (direction)
             {
                 case Direction.Down:
                     newPacmanRow++;
@@ -86,17 +104,7 @@ namespace PacmanLibrary
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            newPacmanRow = CheckInBounds(true, newPacmanRow);
-            newPacmanCol = CheckInBounds(false, newPacmanCol);
-
-            
-            IsNextCellFood = Cells[newPacmanRow, newPacmanCol].State == State.Food;
-
-            if (Cells[newPacmanRow, newPacmanCol].State == State.Wall) return;
-
-            Cells[Pacman.Row, Pacman.Column].SetState(State.Empty); 
-            PlacePacman(newPacmanRow, newPacmanCol);
+            return new [] {newPacmanRow, newPacmanCol};
         }
 
         private int CheckInBounds(bool isRow, int index)
@@ -111,8 +119,14 @@ namespace PacmanLibrary
                 if (index >= _totalCols) return 0;
                 if (index < 0) return _totalCols - 1;
             }
-
             return index;
+        }
+
+        public bool CanPacmanMoveThisDirection(Direction direction)
+        {  
+            var coord = NextCell(direction);
+
+            return Cells[coord[0], coord[1]].State != State.Wall;
         }
     }
 }
