@@ -11,6 +11,7 @@ namespace PacmanLibrary
         public ICell[,] Cells { get; }
         private readonly int _totalRows;
         private readonly int _totalCols;
+        public bool IsNextCellFood { get; private set; }
 
         public Board(IPacman pacman, int totalRows, int totalCols)
         {
@@ -73,6 +74,8 @@ namespace PacmanLibrary
 
             newPacmanRow = CheckInBounds(true, newPacmanRow);
             newPacmanCol = CheckInBounds(false, newPacmanCol);
+
+            IsNextCellFood = Cells[newPacmanRow, newPacmanCol].State == State.Food;
 
             PlacePacman(newPacmanRow, newPacmanCol);
         }

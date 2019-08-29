@@ -21,14 +21,19 @@ namespace PacmanLibrary
         }
 
         public void Play(IResponseManager responseManager)
-        { 
+        {
             _responseManager = responseManager;
-            
+
+            Loop();
+        }
+
+        private void Loop()
+        {
             var aTimer = new Timer {Interval = 500};
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
-            
+
             while (!IsGameOver())
             {
                 var direction = _responseManager.GetDirection();
@@ -50,13 +55,14 @@ namespace PacmanLibrary
                         break;
                 }
             }
-            
+
             aTimer.Stop();
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Board.MovePacman();
+            if (Board.IsNextCellFood) Score += 10;
             _responseManager.PrintBoard(Board.Cells, Board.Pacman);
         }
 
