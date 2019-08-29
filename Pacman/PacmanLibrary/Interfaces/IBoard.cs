@@ -1,3 +1,5 @@
+using PacmanLibrary.Enums;
+
 namespace PacmanLibrary.Interfaces
 {
     public interface IBoard
@@ -8,5 +10,6 @@ namespace PacmanLibrary.Interfaces
         void Initialise();
         void PlacePacman(int row, int col); 
         void MovePacman();
+        bool CanPacmanMoveThisDirection(Direction direction);
     }
 }

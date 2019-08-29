@@ -40,16 +40,16 @@ namespace PacmanLibrary
                 switch (direction)
                 {
                     case Direction.Up:
-                        Board.Pacman.SetDirection(Direction.Up);
+                        if(Board.CanPacmanMoveThisDirection(Direction.Up)) Board.Pacman.SetDirection(Direction.Up);
                         break;
                     case Direction.Down:
-                        Board.Pacman.SetDirection(Direction.Down);
+                        if(Board.CanPacmanMoveThisDirection(Direction.Down)) Board.Pacman.SetDirection(Direction.Down);
                         break;
                     case Direction.Left:
-                        Board.Pacman.SetDirection(Direction.Left);
+                        if(Board.CanPacmanMoveThisDirection(Direction.Left)) Board.Pacman.SetDirection(Direction.Left);
                         break;
                     case Direction.Right:
-                        Board.Pacman.SetDirection(Direction.Right);
+                        if(Board.CanPacmanMoveThisDirection(Direction.Right)) Board.Pacman.SetDirection(Direction.Right);
                         break;
                     case Direction.Null:
                         break;
