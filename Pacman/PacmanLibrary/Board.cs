@@ -36,29 +36,30 @@ namespace PacmanLibrary
 
         public void Initialise()
         {
-//            foreach (var cell in Cells)
-//            {
-//                cell.SetState(State.Food);
-//            }
-
-            for (var i = 0; i < _totalRows; i++)
+            foreach (var cell in Cells)
             {
-                for (var j = 0; j < _totalCols; j++)
-                {
-                    if (i == 0 || i == _totalRows - 1)
-                    {
-                        Cells[i, j] = new Cell(State.Wall);
-                    }
-                    else
-                    {
-                        Cells[i, j] = new Cell(State.Food);
-                    }
-                }
+                cell.SetState(State.Food);
             }
+
+//            for (var i = 0; i < _totalRows; i++)
+//            {
+//                for (var j = 0; j < _totalCols; j++)
+//                {
+//                    if (i == 0 || i == _totalRows - 1)
+//                    {
+//                        Cells[i, j] = new Cell(State.Wall);
+//                    }
+//                    else
+//                    {
+//                        Cells[i, j] = new Cell(State.Food);
+//                    }
+//                }
+//            }
         }
 
         public void PlacePacman(int row, int column)
         {
+            if(row < 0 || row >= _totalRows || column < 0 || column >= _totalCols) throw new ArgumentOutOfRangeException(Constants.Constants.ExceptionForPlacingPacmanOffTheBoard);
             Pacman.SetLocation(row, column);
             Cells[row, column].SetState(State.Pacman);
         }

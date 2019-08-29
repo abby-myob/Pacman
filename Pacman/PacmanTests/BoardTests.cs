@@ -164,20 +164,35 @@ namespace PacmanTests
             Assert.Equal(expectedCol, board.Pacman.Column);
         }
         
-        [Theory]  
-        [InlineData(2, 2, Direction.Up, 0,0)] 
-        public void if_direction_of_pacman_is_null_then_return_exception_out_of_range(int rows, int cols,
-            Direction direction, int pacRow, int pacCol)
+        [Fact]  
+        public void if_direction_of_pacman_is_null_then_return_exception_out_of_range()
         {
             // Arrange
-            var pacman = new Pacman(direction);
-            var board = new Board(pacman, rows, cols);
+            var pacman = new Pacman(Direction.Down);
+            var board = new Board(pacman, 2, 2);
             board.Initialise();
-            board.PlacePacman(pacRow, pacCol);
+            board.PlacePacman(1, 0);
             board.Pacman.SetDirection(Direction.Null);
 
             // Act
             void Act() => board.MovePacman();
+            
+            // Assert
+            Assert.Throws<ArgumentOutOfRangeException>(Act);
+        }     
+        
+        [Theory]  
+        [InlineData(2, 2, 2, 2)] 
+        [InlineData(2, 10, 20, 2)] 
+        public void if_you_place_pacman_outside_of_the_array_throw_exception(int rows, int cols, int pacRow, int pacCol)
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Down);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            
+            // Act
+            void Act() => board.PlacePacman(pacRow, pacCol); 
             
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(Act);

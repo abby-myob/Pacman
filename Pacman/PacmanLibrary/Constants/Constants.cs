@@ -15,6 +15,6 @@ namespace PacmanLibrary.Constants
         public const string Score = "Score:";
         
         public const string ExceptionForRowsAndCols = "Array size must be greater or equal to 1";
-        
+        public const string ExceptionForPlacingPacmanOffTheBoard = "You've placed pacman off the board";
     }
 }
