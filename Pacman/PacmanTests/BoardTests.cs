@@ -87,78 +87,78 @@ namespace PacmanTests
             Assert.Equal(State.Pacman, board.Cells[0, 0].State);
         }
 
-        [Fact]
-        public void output_a_string_of_the_board_state()
-        {
-            // Arrange
-            var pacman = new Pacman(Direction.Up);
-            var board = new Board(pacman, 2, 2);
-            board.Initialise();
-            var expected = " .  . \n .  . \n";
-
-            // Act
-            var boardState = board.BoardStateToString();
-
-            // Assert
-            Assert.Equal(expected, boardState);
-        }
-
-        [Theory]
-        [InlineData(2, 2, Direction.Up, 0,0," v  . \n .  . \n")]
-        [InlineData(1, 1, Direction.Down, 0,0," ^ \n")]
-        [InlineData(3, 4, Direction.Right, 1,0," .  .  .  . \n <  .  .  . \n .  .  .  . \n")]
-        [InlineData(2, 2, Direction.Left, 1,1," .  . \n .  > \n")]
-        public void check_output_string_is_correct_for_rows_and_cols_and_placement_of_pacman(int rows, int cols,
-            Direction direction, int pacRow, int pacCol, string expected)
-        {
-            // Arrange
-            var pacman = new Pacman(direction);
-            var board = new Board(pacman, rows, cols);
-            board.Initialise();
-            board.PlacePacman(pacRow, pacCol); 
-
-            // Act
-            var boardState = board.BoardStateToString();
-
-            // Assert
-            Assert.Equal(expected, boardState);
-        }
-        
-        [Theory] 
-        [InlineData(2, 2, Direction.Left, 1,1," .  . \n >    \n")]
-        public void move_pacman_and_check_pacman_is_in_right_place(int rows, int cols,
-            Direction direction, int pacRow, int pacCol, string expected)
-        {
-            // Arrange
-            var pacman = new Pacman(direction);
-            var board = new Board(pacman, rows, cols);
-            board.Initialise();
-            board.PlacePacman(pacRow, pacCol); 
-
-            // Act
-            board.MovePacman();
-
-            // Assert
-            Assert.Equal(expected, board.BoardStateToString());
-        }
-            
-        [Theory] 
-        [InlineData(2, 2, Direction.Left, 1,0," .  . \n    > \n")]
-        [InlineData(2, 2, Direction.Up, 0,0,"    . \n v  . \n")]
-        public void move_pacman_and_check_it_overlaps_the_board(int rows, int cols,
-            Direction direction, int pacRow, int pacCol, string expected)
-        {
-            // Arrange
-            var pacman = new Pacman(direction);
-            var board = new Board(pacman, rows, cols);
-            board.Initialise();
-            board.PlacePacman(pacRow, pacCol); 
-
-            // Act
-            board.MovePacman();
-
-            // Assert
-            Assert.Equal(expected, board.BoardStateToString());
-        }
+//        [Fact]
+//        public void output_a_string_of_the_board_state()
+//        {
+//            // Arrange
+//            var pacman = new Pacman(Direction.Up);
+//            var board = new Board(pacman, 2, 2);
+//            board.Initialise();
+//            var expected = " .  . \n .  . \n";
+//
+//            // Act
+//            var boardState = board.BoardStateToString();
+//
+//            // Assert
+//            Assert.Equal(expected, boardState);
+//        }
+//
+//        [Theory]
+//        [InlineData(2, 2, Direction.Up, 0,0," v  . \n .  . \n")]
+//        [InlineData(1, 1, Direction.Down, 0,0," ^ \n")]
+//        [InlineData(3, 4, Direction.Right, 1,0," .  .  .  . \n <  .  .  . \n .  .  .  . \n")]
+//        [InlineData(2, 2, Direction.Left, 1,1," .  . \n .  > \n")]
+//        public void check_output_string_is_correct_for_rows_and_cols_and_placement_of_pacman(int rows, int cols,
+//            Direction direction, int pacRow, int pacCol, string expected)
+//        {
+//            // Arrange
+//            var pacman = new Pacman(direction);
+//            var board = new Board(pacman, rows, cols);
+//            board.Initialise();
+//            board.PlacePacman(pacRow, pacCol); 
+//
+//            // Act
+//            var boardState = board.BoardStateToString();
+//
+//            // Assert
+//            Assert.Equal(expected, boardState);
+//        }
+//        
+//        [Theory] 
+//        [InlineData(2, 2, Direction.Left, 1,1," .  . \n >    \n")]
+//        public void move_pacman_and_check_pacman_is_in_right_place(int rows, int cols,
+//            Direction direction, int pacRow, int pacCol, string expected)
+//        {
+//            // Arrange
+//            var pacman = new Pacman(direction);
+//            var board = new Board(pacman, rows, cols);
+//            board.Initialise();
+//            board.PlacePacman(pacRow, pacCol); 
+//
+//            // Act
+//            board.MovePacman();
+//
+//            // Assert
+//            Assert.Equal(expected, board.BoardStateToString());
+//        }
+//            
+//        [Theory] 
+//        [InlineData(2, 2, Direction.Left, 1,0," .  . \n    > \n")]
+//        [InlineData(2, 2, Direction.Up, 0,0,"    . \n v  . \n")]
+//        public void move_pacman_and_check_it_overlaps_the_board(int rows, int cols,
+//            Direction direction, int pacRow, int pacCol, string expected)
+//        {
+//            // Arrange
+//            var pacman = new Pacman(direction);
+//            var board = new Board(pacman, rows, cols);
+//            board.Initialise();
+//            board.PlacePacman(pacRow, pacCol); 
+//
+//            // Act
+//            board.MovePacman();
+//
+//            // Assert
+//            Assert.Equal(expected, board.BoardStateToString());
+//        }
     }
 }

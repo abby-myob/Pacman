@@ -5,8 +5,7 @@ namespace PacmanLibrary.Interfaces
         ICell[,] Cells { get; }
         IPacman Pacman { get; }
         void Initialise();
-        void PlacePacman(int row, int col);
-        string BoardStateToString();
+        void PlacePacman(int row, int col); 
         void MovePacman();
     }
 }
