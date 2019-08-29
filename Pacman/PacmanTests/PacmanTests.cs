@@ -1,4 +1,3 @@
-using System.Configuration;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
 using Xunit;
@@ -12,7 +11,7 @@ namespace PacmanTests
         [InlineData(Direction.Down, Direction.Down)]
         [InlineData(Direction.Up, Direction.Left)]
         [InlineData(Direction.Right, Direction.Right)]
-        public void initialise_pacman(Direction init, Direction change)
+        public void check_setDirection_updates_pacmans_direction_property(Direction init, Direction change)
         {
             // Arrange
             var pacman = new Pacman(init);
@@ -44,7 +43,9 @@ namespace PacmanTests
 
         [Theory]
         [InlineData(0,0)]
-        public void set_Location_of_pacman_check_it_works(int row, int col)
+        [InlineData(0,10)]
+        [InlineData(20,15)]
+        public void checking_setLocation_will_set_row_and_col_of_pacman_object(int row, int col)
         {
             // Arrange
             var pacman = new Pacman(Direction.Down);

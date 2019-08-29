@@ -11,7 +11,7 @@ namespace PacmanTests
         [InlineData(State.Empty, State.Empty)]
         [InlineData(State.Empty, State.Food)]
         [InlineData(State.Food, State.Food)]
-        public void init_Cell(State init, State change)
+        public void initialize_cell_with_state_and_check_set_state_works(State init, State change)
         {
             // Arrange 
             var cell = new Cell(init);
