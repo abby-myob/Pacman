@@ -16,7 +16,7 @@ namespace PacmanLibrary
         public Board(IPacman pacman, int totalRows, int totalCols)
         {
             Pacman = pacman;
-            if (totalRows < 1 || totalCols < 1) throw new ArgumentException("Array size must be greater or equal to 1");
+            if (totalRows < 1 || totalCols < 1) throw new ArgumentException(Constants.Constants.ExceptionForRowsAndCols);
             _totalRows = totalRows;
             _totalCols = totalCols;
             Cells = new ICell[totalRows, totalCols];

@@ -7,5 +7,6 @@ namespace PacmanLibrary.Interfaces
     { 
         void PrintBoard(ICell[,] cells, IPacman pacman);
         Direction GetDirection();
+        void PrintScore(int score);
     }
 }

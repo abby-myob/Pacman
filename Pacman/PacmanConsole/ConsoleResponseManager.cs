@@ -73,5 +73,10 @@ namespace PacmanConsole
                     return Direction.Null;
             } 
         }
+
+        public void PrintScore(int score)
+        {
+            Console.WriteLine($"Score: {score}");
+        }
     }
 }

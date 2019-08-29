@@ -63,6 +63,7 @@ namespace PacmanLibrary
         {
             Board.MovePacman();
             if (Board.IsNextCellFood) Score += 10;
+            _responseManager.PrintScore(Score);
             _responseManager.PrintBoard(Board.Cells, Board.Pacman);
         }
 
