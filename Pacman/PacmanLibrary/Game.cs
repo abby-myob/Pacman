@@ -1,14 +1,19 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
 using System.Threading.Tasks;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces; 
+using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace PacmanLibrary
 {
     public class Game
     {
         private readonly IBoard _board;
+        private IPrinter _printer;
 
         public Game(IBoard board)
         {
@@ -17,13 +22,19 @@ namespace PacmanLibrary
 
         public void Play(IPrinter printer)
         {
+            _printer = printer;
             _board.Initialise();
             _board.PlacePacman(0,0);
 
             while(!IsGameOver())
-            {
-                printer.PrintBoard(_board.Cells, _board.Pacman);
+            { 
 
+
+
+                var aTimer = new Timer{Interval = 3000};
+                aTimer.Elapsed += OnTimedEvent;
+                aTimer.AutoReset = true;
+                aTimer.Enabled = true;
 
 //                var ch = Console.ReadKey(false).Key;
 //                switch(ch)
@@ -41,12 +52,18 @@ namespace PacmanLibrary
 //                        _board.Pacman.SetDirection(Direction.Right); 
 //                        break;
 //                }
-                
-                _board.MovePacman();
+
+                 
             }
             
-            printer.PrintBoard(_board.Cells, _board.Pacman);
+            
 
+        }
+
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            _board.MovePacman();
+            _printer.PrintBoard(_board.Cells, _board.Pacman);
         }
 
         public bool IsGameOver()
