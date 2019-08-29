@@ -2,19 +2,18 @@ using System.Linq;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 using System.Timers;
-using System.Xml.Schema;
 
 namespace PacmanLibrary
 {
     public class Game
     {
-        public IBoard Board;
+        public IBoard Board; 
         private IResponseManager _responseManager;
         public int Score;
 
         public Game(IBoard board)
         {
-            Board = board;
+            Board = board; 
             Score = 0;
             Board.Initialise();
             Board.PlacePacman(0, 0);
@@ -28,12 +27,14 @@ namespace PacmanLibrary
         }
 
         private void Loop()
-        {
+        { 
             var aTimer = new Timer {Interval = 500};
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
-            aTimer.Enabled = true;
-
+            aTimer.Enabled = true;  
+            
+            
+            
             while (!IsGameOver())
             {
                 var direction = _responseManager.GetDirection();
@@ -56,7 +57,7 @@ namespace PacmanLibrary
                 }
             }
 
-            aTimer.Stop();
+            aTimer.Stop(); 
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -68,8 +69,11 @@ namespace PacmanLibrary
         }
 
         public bool IsGameOver()
-        {
+        { 
             return Board.Cells.Cast<ICell>().All(cell => cell.State != State.Food);
         }
     }
+
+
+
 }

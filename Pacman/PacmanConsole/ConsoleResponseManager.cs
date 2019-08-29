@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using PacmanLibrary;
+using PacmanLibrary.Constants;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
@@ -21,25 +22,25 @@ namespace PacmanConsole
                     switch (state)
                     {
                         case State.Empty:
-                            stringBuilder.Append("   ");
+                            stringBuilder.Append(Constants.EmptyCell);
                             break;
                         case State.Food:
-                            stringBuilder.Append(" . ");
+                            stringBuilder.Append(Constants.FoodCell);
                             break;
                         case State.Pacman:
                             switch (pacman.Direction)
                             {
                                 case Direction.Up:
-                                    stringBuilder.Append(" v ");
+                                    stringBuilder.Append(Constants.PacmanUp);
                                     break;
                                 case Direction.Down:
-                                    stringBuilder.Append(" ^ ");
+                                    stringBuilder.Append(Constants.PacmanDown);
                                     break;
                                 case Direction.Left:
-                                    stringBuilder.Append(" > ");
+                                    stringBuilder.Append(Constants.PacmanLeft);
                                     break;
                                 case Direction.Right:
-                                    stringBuilder.Append(" < ");
+                                    stringBuilder.Append(Constants.PacmanRight);
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
@@ -51,7 +52,7 @@ namespace PacmanConsole
                     }
                 }
 
-                stringBuilder.Append("\n");
+                stringBuilder.Append(Constants.NewLine);
             }
 
             Console.WriteLine(stringBuilder.ToString());
@@ -77,7 +78,7 @@ namespace PacmanConsole
 
         public void PrintScore(int score)
         {
-            Console.WriteLine($"Score: {score}");
+            Console.WriteLine($"{Constants.Score} {score}");
         }
     }
 }
