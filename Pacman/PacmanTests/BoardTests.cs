@@ -163,5 +163,24 @@ namespace PacmanTests
             Assert.Equal(expectedRow, board.Pacman.Row);
             Assert.Equal(expectedCol, board.Pacman.Column);
         }
+        
+        [Theory]  
+        [InlineData(2, 2, Direction.Up, 0,0)] 
+        public void if_direction_of_pacman_is_null_then_return_exception_out_of_range(int rows, int cols,
+            Direction direction, int pacRow, int pacCol)
+        {
+            // Arrange
+            var pacman = new Pacman(direction);
+            var board = new Board(pacman, rows, cols);
+            board.Initialise();
+            board.PlacePacman(pacRow, pacCol);
+            board.Pacman.SetDirection(Direction.Null);
+
+            // Act
+            void Act() => board.MovePacman();
+            
+            // Assert
+            Assert.Throws<ArgumentOutOfRangeException>(Act);
+        }
     }
 }

@@ -86,6 +86,28 @@ namespace PacmanTests
 
             // Assert
             Assert.Equal(20, score);
+        }     
+        
+        [Theory]  
+        [InlineData(Direction.Down, 2, 1)]
+        [InlineData(Direction.Up, 2, 1)]
+        [InlineData(Direction.Left, 1, 2)]
+        [InlineData(Direction.Right, 1, 2)]
+        public void check_direction_input_from_response_manager(Direction expected, int row, int col)
+        {
+            // Arrange
+            var pacman = new Pacman(Direction.Down);
+            var board = new Board(pacman, row,col);  
+            var cr = new Mock<IResponseManager>();
+            cr.Setup(c => c.GetDirection()).Returns(expected);
+            var game = new Game(board);
+            game.Play(cr.Object);
+
+            // Act
+            Direction direction = game.Board.Pacman.Direction;
+
+            // Assert
+            Assert.Equal(expected, direction);
         }
     }
 }
