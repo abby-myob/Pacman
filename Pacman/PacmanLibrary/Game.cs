@@ -7,7 +7,7 @@ namespace PacmanLibrary
 {
     public class Game
     {
-        public IBoard Board; 
+        public readonly IBoard Board; 
         private IResponseManager _responseManager;
         public int Score;
 
@@ -33,8 +33,7 @@ namespace PacmanLibrary
             aTimer.AutoReset = true;
             aTimer.Enabled = true;  
             
-            
-            
+            //I'm under the impression that it could just be waiting for a key response. So it's not repeating constantly
             while (!IsGameOver())
             {
                 var direction = _responseManager.GetDirection();
@@ -72,8 +71,5 @@ namespace PacmanLibrary
         { 
             return Board.Cells.Cast<ICell>().All(cell => cell.State != State.Food);
         }
-    }
-
-
-
+    } 
 }

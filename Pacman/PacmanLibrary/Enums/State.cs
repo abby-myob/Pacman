@@ -4,6 +4,7 @@ namespace PacmanLibrary.Enums
     {
         Food,
         Empty,
-        Pacman
+        Pacman, 
+        Wall
     }
 }

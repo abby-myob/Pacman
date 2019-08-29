@@ -1,6 +1,5 @@
 using System;
 using System.Text;
-using PacmanLibrary;
 using PacmanLibrary.Constants;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
@@ -26,6 +25,9 @@ namespace PacmanConsole
                             break;
                         case State.Food:
                             stringBuilder.Append(Constants.FoodCell);
+                            break;
+                        case State.Wall:
+                            stringBuilder.Append(Constants.Wall);
                             break;
                         case State.Pacman:
                             switch (pacman.Direction)
