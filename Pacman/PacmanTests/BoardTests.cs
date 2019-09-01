@@ -61,7 +61,7 @@ namespace PacmanTests
             // Arrange
             var pacman = new Pacman(Direction.Up);
             var board = new Board(pacman, 2, 2);
-            board.Initialise();
+            board.Initialise(0);
 
             // Act
             board.PlacePacman(0, 0);
@@ -76,7 +76,7 @@ namespace PacmanTests
             // Arrange
             var pacman = new Pacman(Direction.Down);
             var board = new Board(pacman, 2, 2);
-            board.Initialise();
+            board.Initialise(0);
             board.PlacePacman(1, 0);
             board.Pacman.SetDirection(Direction.Null);
 
@@ -98,7 +98,7 @@ namespace PacmanTests
             // Arrange
             var pacman = new Pacman(direction);
             var board = new Board(pacman, rows, cols);
-            board.Initialise();
+            board.Initialise(0);
             foreach (var cell in board.Cells)
             {
                 cell.SetState(State.Food);
@@ -121,7 +121,7 @@ namespace PacmanTests
             // Arrange
             var pacman = new Pacman(Direction.Down);
             var board = new Board(pacman, rows, cols);
-            board.Initialise();
+            board.Initialise(0);
             
             // Act
             void Act() => board.PlacePacman(pacRow, pacCol);  
@@ -140,7 +140,7 @@ namespace PacmanTests
             // Arrange
             var pacman = new Pacman(Direction.Down);
             var board = new Board(pacman, 3, 3);
-            board.Initialise();
+            board.Initialise(0);
             
             foreach (var cell in board.Cells)
             {

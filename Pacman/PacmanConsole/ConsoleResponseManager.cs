@@ -9,9 +9,10 @@ namespace PacmanConsole
     public class ConsoleResponseManager : IResponseManager
     {
 
-        public void PrintBoard(ICell[,] cells, IPacman pacman)
+        public void PrintBoard(ICell[,] cells, IPacman pacman, int level)
         {
             Console.Clear();
+            Console.WriteLine($"{Constants.Level} {level} \n");
 
             var stringBuilder = new StringBuilder();
             for (var row = 0; row < cells.GetLength(0); row++)

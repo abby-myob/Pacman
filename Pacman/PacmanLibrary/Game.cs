@@ -9,13 +9,14 @@ namespace PacmanLibrary
     {
         public readonly IBoard Board; 
         private IResponseManager _responseManager;
-        public int Score;
+        private int _score;
+        private int _level;
 
         public Game(IBoard board)
         {
             Board = board; 
-            Score = 0;
-            Board.Initialise();
+            _score = 0;
+            Board.Initialise(0);
             Board.PlacePacman(1, 1);
         }
 
@@ -23,7 +24,13 @@ namespace PacmanLibrary
         {
             _responseManager = responseManager;
 
-            Loop();
+            for (var level = 1; level <= 2; level++)
+            {
+                _level = level;
+                Board.Initialise(level);
+                Loop();
+            }
+            
         }
 
         private void Loop()
@@ -32,8 +39,7 @@ namespace PacmanLibrary
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;  
-            
-            //I'm under the impression that it could just be waiting for a key response. So it's not repeating constantly
+             
             while (!IsGameOver())
             {
                 var direction = _responseManager.GetDirection();
@@ -62,9 +68,9 @@ namespace PacmanLibrary
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Board.MovePacman();
-            if (Board.IsNextCellFood) Score += 10;
-            _responseManager.PrintBoard(Board.Cells, Board.Pacman);
-            _responseManager.PrintScore(Score);
+            if (Board.IsNextCellFood) _score += 10;
+            _responseManager.PrintBoard(Board.Cells, Board.Pacman, _level);
+            _responseManager.PrintScore(_score);
         }
 
         public bool IsGameOver()
