@@ -16,7 +16,7 @@ namespace PacmanLibrary
             Board = board; 
             Score = 0;
             Board.Initialise();
-            Board.PlacePacman(0, 0);
+            Board.PlacePacman(1, 1);
         }
 
         public void Play(IResponseManager responseManager)
@@ -63,8 +63,8 @@ namespace PacmanLibrary
         {
             Board.MovePacman();
             if (Board.IsNextCellFood) Score += 10;
-            _responseManager.PrintScore(Score);
             _responseManager.PrintBoard(Board.Cells, Board.Pacman);
+            _responseManager.PrintScore(Score);
         }
 
         public bool IsGameOver()

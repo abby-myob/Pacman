@@ -11,6 +11,7 @@ namespace PacmanConsole
 
         public void PrintBoard(ICell[,] cells, IPacman pacman)
         {
+            Console.Clear();
 
             var stringBuilder = new StringBuilder();
             for (var row = 0; row < cells.GetLength(0); row++)

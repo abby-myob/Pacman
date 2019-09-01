@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
@@ -37,25 +36,56 @@ namespace PacmanLibrary
 
         public void Initialise()
         {
-//            foreach (var cell in Cells)
-//            {
-//                cell.SetState(State.Food);
-//            }
 
-            for (var i = 0; i < _totalRows; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (var j = 0; j < _totalCols; j++)
+                for (int j = 0; j < 7; j++)
                 {
-                    if (i == 0 || i == _totalRows - 1)
+                    switch (i)
                     {
-                        Cells[i, j] = new Cell(State.Wall);
-                    }
-                    else
-                    {
-                        Cells[i, j] = new Cell(State.Food);
+                        case 0:
+                        case 4:
+                            Cells[i, j] = new Cell(State.Wall);
+                            break;
+                        case 1:
+                        case 3:
+                        {
+                            if (j == 0 || j == 6)
+                            {
+                                Cells[i, j] = new Cell(State.Wall);
+                            }
+                            else
+                            {
+                                Cells[i, j] = new Cell(State.Food);
+                            }
+
+                            break;
+                        }
+
+                        case 2 when (j > 1 && j < 5):
+                            Cells[i, j] = new Cell(State.Wall);
+                            break;
+                        default:
+                            Cells[i, j] = new Cell(State.Food);
+                            break;
                     }
                 }
             }
+            
+//            for (var i = 0; i < _totalRows; i++)
+//            {
+//                for (var j = 0; j < _totalCols; j++)
+//                {
+//                    if (i == 0 || i == _totalRows - 1)
+//                    {
+//                        Cells[i, j] = new Cell(State.Wall);
+//                    }
+//                    else
+//                    {
+//                        Cells[i, j] = new Cell(State.Food);
+//                    }
+//                }
+//            }
         }
 
         public void PlacePacman(int row, int column)

@@ -124,7 +124,7 @@ namespace PacmanTests
             board.Initialise();
             
             // Act
-            void Act() => board.PlacePacman(pacRow, pacCol); 
+            void Act() => board.PlacePacman(pacRow, pacCol);  
             
             // Assert
             Assert.Throws<ArgumentOutOfRangeException>(Act);
