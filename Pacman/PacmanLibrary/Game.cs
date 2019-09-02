@@ -11,11 +11,13 @@ namespace PacmanLibrary
         private IResponseManager _responseManager;
         private int _score;
         private int _level;
+        private int _lives;
 
         public Game(IBoard board)
         {
             Board = board; 
             _score = 0;
+            _lives = 3;
             Board.Initialise(0);
             Board.PlacePacman(1, 1);
         }
@@ -67,10 +69,11 @@ namespace PacmanLibrary
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            Board.MovePacman();
             Board.MoveGhost();
+            Board.MovePacman();
+            if (Board.IsPacmanInGhostCell()) _lives--;
             if (Board.IsNextCellFood) _score += 10;
-            _responseManager.PrintBoard(Board.Cells, Board.Pacman, _level);
+            _responseManager.PrintBoard(Board.Cells, Board.Pacman, _level, _lives);
             _responseManager.PrintScore(_score);
         }
 

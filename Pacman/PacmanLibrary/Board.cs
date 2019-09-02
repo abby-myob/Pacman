@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
@@ -12,7 +11,7 @@ namespace PacmanLibrary
         public ICell[,] Cells { get; private set; }
         private int _totalRows;
         private int _totalCols;
-        public bool IsNextCellFood { get; private set; }
+        public bool IsNextCellFood { get; private set; } 
 
         public Board(IPacman pacman, int totalRows, int totalCols)
         {
@@ -37,8 +36,13 @@ namespace PacmanLibrary
             }
         }
 
-        public void Initialise(int level)
+        public bool IsPacmanInGhostCell()
         {
+            return Ghost.Column == Pacman.Column || Ghost.Row == Pacman.Row;
+        }
+
+        public void Initialise(int level)
+        { 
             switch (level)
             {
                 case 0:
@@ -56,7 +60,7 @@ namespace PacmanLibrary
         }
 
         private void LevelOne()
-        {
+        { 
             _totalRows = 6;
             _totalCols = 6;
             Cells = new ICell[_totalRows, _totalCols];
@@ -86,7 +90,7 @@ namespace PacmanLibrary
         }
 
         private void LevelTwo()
-        {
+        { 
             _totalRows = 5;
             _totalCols = 7;
             Cells = new ICell[_totalRows, _totalCols];
@@ -128,6 +132,7 @@ namespace PacmanLibrary
             }
 
             PlacePacman(1, 1);
+            PlaceGhost(3,4);
         }
 
         public void PlacePacman(int row, int column)
@@ -139,7 +144,7 @@ namespace PacmanLibrary
         }
 
         public void MovePacman()
-        {
+        { 
             var newCoord = NextCellCoords(Pacman.Direction, Pacman);
 
             var newPacmanRow = CheckInBounds(true, newCoord[0]);
@@ -149,7 +154,7 @@ namespace PacmanLibrary
             IsNextCellFood = Cells[newPacmanRow, newPacmanCol].State == State.Food;
 
             if (Cells[newPacmanRow, newPacmanCol].State == State.Wall) return;
-
+            
             Cells[Pacman.Row, Pacman.Column].SetState(State.Empty);
 
             PlacePacman(newPacmanRow, newPacmanCol);
@@ -256,7 +261,6 @@ namespace PacmanLibrary
 
             Cells[Ghost.Row, Ghost.Column].SetState(Ghost.CurrentCellState);
             Ghost.SetCurrentCellState(Cells[newGhostRow, newGhostCol].State);
-            
 
             PlaceGhost(newGhostRow, newGhostCol);
         }
