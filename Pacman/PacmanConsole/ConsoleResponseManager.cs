@@ -51,6 +51,9 @@ namespace PacmanConsole
                             }
 
                             break;
+                        case State.Ghost:
+                            stringBuilder.Append(Constants.Ghost);
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }

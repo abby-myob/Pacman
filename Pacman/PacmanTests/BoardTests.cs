@@ -149,7 +149,7 @@ namespace PacmanTests
             board.PlacePacman(1, 1);
 
             // Act
-            bool check = board.CanPacmanMoveThisDirection(input);
+            bool check = board.CanTheyMoveThisDirection(input, pacman);
             
             // Assert
             Assert.False(check);

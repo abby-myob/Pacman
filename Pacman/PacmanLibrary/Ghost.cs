@@ -9,6 +9,8 @@ namespace PacmanLibrary
         public int Row { get; private set; }
         public int Column { get; private set; }
         
+        public State CurrentCellState { get; private set; }
+        
         public Ghost(Direction direction)
         {
             Direction = direction; 
@@ -22,6 +24,11 @@ namespace PacmanLibrary
         {
             Row = row;
             Column = column;
+        }
+        
+        public void SetCurrentCellState(State state)
+        {
+            CurrentCellState = state;
         }
     }
 }

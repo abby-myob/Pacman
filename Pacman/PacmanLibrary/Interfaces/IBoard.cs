@@ -10,6 +10,7 @@ namespace PacmanLibrary.Interfaces
         void Initialise(int level);
         void PlacePacman(int row, int col); 
         void MovePacman();
-        bool CanPacmanMoveThisDirection(Direction direction);
+        bool CanTheyMoveThisDirection(Direction direction, IPacman being);
+        void MoveGhost();
     }
 }

@@ -8,6 +8,7 @@ namespace PacmanLibrary
         public Direction Direction { get; private set; }
         public int Row { get; private set; }
         public int Column { get; private set; }
+        public State CurrentCellState { get; set; }
 
         public Pacman(Direction direction)
         {
@@ -23,6 +24,11 @@ namespace PacmanLibrary
         {
             Row = row;
             Column = column;
+        }
+
+        public void SetCurrentCellState(State state)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

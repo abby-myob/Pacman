@@ -5,6 +5,7 @@ namespace PacmanLibrary.Enums
         Food,
         Empty,
         Pacman, 
-        Wall
+        Wall,
+        Ghost
     }
 }

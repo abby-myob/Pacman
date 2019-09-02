@@ -46,16 +46,16 @@ namespace PacmanLibrary
                 switch (direction)
                 {
                     case Direction.Up:
-                        if(Board.CanPacmanMoveThisDirection(Direction.Up)) Board.Pacman.SetDirection(Direction.Up);
+                        if(Board.CanTheyMoveThisDirection(Direction.Up, Board.Pacman)) Board.Pacman.SetDirection(Direction.Up);
                         break;
                     case Direction.Down:
-                        if(Board.CanPacmanMoveThisDirection(Direction.Down)) Board.Pacman.SetDirection(Direction.Down);
+                        if(Board.CanTheyMoveThisDirection(Direction.Down, Board.Pacman)) Board.Pacman.SetDirection(Direction.Down);
                         break;
                     case Direction.Left:
-                        if(Board.CanPacmanMoveThisDirection(Direction.Left)) Board.Pacman.SetDirection(Direction.Left);
+                        if(Board.CanTheyMoveThisDirection(Direction.Left, Board.Pacman)) Board.Pacman.SetDirection(Direction.Left);
                         break;
                     case Direction.Right:
-                        if(Board.CanPacmanMoveThisDirection(Direction.Right)) Board.Pacman.SetDirection(Direction.Right);
+                        if(Board.CanTheyMoveThisDirection(Direction.Right, Board.Pacman)) Board.Pacman.SetDirection(Direction.Right);
                         break;
                     case Direction.Null:
                         break;
@@ -68,6 +68,7 @@ namespace PacmanLibrary
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Board.MovePacman();
+            Board.MoveGhost();
             if (Board.IsNextCellFood) _score += 10;
             _responseManager.PrintBoard(Board.Cells, Board.Pacman, _level);
             _responseManager.PrintScore(_score);
