@@ -7,7 +7,7 @@ namespace PacmanLibrary.Interfaces
         ICell[,] Cells { get; }
         IPacman Pacman { get; }
         bool IsNextCellFood { get; }
-        void Initialise();
+        void Initialise(int level);
         void PlacePacman(int row, int col); 
         void MovePacman();
         bool CanPacmanMoveThisDirection(Direction direction);
