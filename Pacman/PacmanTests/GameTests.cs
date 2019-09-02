@@ -1,5 +1,4 @@
 using Moq;
-using PacmanConsole;
 using PacmanLibrary;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
@@ -84,36 +83,36 @@ namespace PacmanTests
             Assert.False(isGameOver);
         }
 
-        [Theory] 
-        [InlineData(Direction.Up, 2, 2, Direction.Left)] 
-        [InlineData(Direction.Up, 5, 2, Direction.Left)] 
-        public void when_pacman_tries_to_turn_into_the_direction_of_a_wall_he_cant(Direction expected, int row, int col, Direction input)
-        {
-            // Arrange
-            var pacman = new Pacman(expected);
-            var board = new Board(pacman, row, col);
-
-            var responseMock = new Mock<IResponseManager>();
-            responseMock.Setup(c => c.GetDirection()).Returns(input);
-
-            var game = new Game(board);
-            for (var i = 0; i < row; i++)
-            {
-                for (var j = 0; j < col; j++)
-                {
-                    if(j == 0) board.Cells[i,j].SetState(State.Wall);
-                    if(j > 0) board.Cells[i,j].SetState(State.Food);
-                }
-            }
-
-            board.PlacePacman(0, 1);
-            game.Play(responseMock.Object);
-
-            // Act
-            var direction = game.Board.Pacman.Direction;
-
-            // Assert
-            Assert.Equal(expected, direction);
-        }
+//        [Theory] 
+//        [InlineData(Direction.Up, 2, 2, Direction.Left)] 
+//        [InlineData(Direction.Up, 5, 2, Direction.Left)] 
+//        public void when_pacman_tries_to_turn_into_the_direction_of_a_wall_he_cant(Direction expected, int row, int col, Direction input)
+//        {
+//            // Arrange
+//            var pacman = new Pacman(expected);
+//            var board = new Board(pacman, row, col);
+//
+//            var responseMock = new Mock<IResponseManager>();
+//            responseMock.Setup(c => c.GetDirection()).Returns(input);
+//
+//            var game = new Game(board);
+//            for (var i = 0; i < row; i++)
+//            {
+//                for (var j = 0; j < col; j++)
+//                {
+//                    if(j == 0) board.Cells[i,j].SetState(State.Wall);
+//                    if(j > 0) board.Cells[i,j].SetState(State.Food);
+//                }
+//            }
+//
+//            board.PlacePacman(0, 1);
+//            game.Play(responseMock.Object);
+//
+//            // Act
+//            var direction = game.Board.Pacman.Direction;
+//
+//            // Assert
+//            Assert.Equal(expected, direction);
+//        }
     }
 }

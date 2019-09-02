@@ -7,7 +7,7 @@ namespace PacmanConsole
     {
         private static void Main()
         {
-            var game = new Game(new Board(new Pacman(Direction.Down), 5,7));
+            var game = new Game(new Board(new Pacman(Direction.Down), 10,10));
             
             game.Play(new ConsoleResponseManager());
         }
