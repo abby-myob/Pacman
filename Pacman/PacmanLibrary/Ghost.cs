@@ -3,7 +3,7 @@ using PacmanLibrary.Interfaces;
 
 namespace PacmanLibrary
 {
-    public class Ghost : IPacman
+    public class Ghost : ICharacter
     { 
         public Direction Direction { get; private set; }
         public int Row { get; private set; }

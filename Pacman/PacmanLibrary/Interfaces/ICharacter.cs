@@ -2,7 +2,7 @@ using PacmanLibrary.Enums;
 
 namespace PacmanLibrary.Interfaces
 {
-    public interface IPacman
+    public interface ICharacter
     {
         Direction Direction { get; }
         int Row { get; }

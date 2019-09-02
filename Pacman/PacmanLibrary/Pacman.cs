@@ -3,12 +3,12 @@ using PacmanLibrary.Interfaces;
 
 namespace PacmanLibrary
 {
-    public class Pacman : IPacman
+    public class Pacman : ICharacter
     {
         public Direction Direction { get; private set; }
         public int Row { get; private set; }
         public int Column { get; private set; }
-        public State CurrentCellState { get; set; }
+        public State CurrentCellState { get; }
 
         public Pacman(Direction direction)
         {

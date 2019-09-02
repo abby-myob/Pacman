@@ -9,11 +9,10 @@ namespace PacmanConsole
     public class ConsoleResponseManager : IResponseManager
     {
 
-        public void PrintBoard(ICell[,] cells, IPacman pacman, int level, int lives)
+        public void PrintBoard(ICell[,] cells, ICharacter character, int level)
         {
             Console.Clear();
-            Console.Write($"{Constants.Level} {level}   |   ");
-            Console.Write($"{Constants.Lives} {lives} \n");
+            Console.Write($"{Constants.Level} {level}   |   "); 
 
             var stringBuilder = new StringBuilder();
             for (var row = 0; row < cells.GetLength(0); row++)
@@ -33,7 +32,7 @@ namespace PacmanConsole
                             stringBuilder.Append(Constants.Wall);
                             break;
                         case State.Pacman:
-                            switch (pacman.Direction)
+                            switch (character.Direction)
                             {
                                 case Direction.Up:
                                     stringBuilder.Append(Constants.PacmanUp);

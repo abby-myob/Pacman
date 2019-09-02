@@ -6,34 +6,18 @@ namespace PacmanLibrary
 {
     public class Board : IBoard
     {
-        public IPacman Pacman { get; }
-        public IPacman Ghost { get; }
+        public ICharacter Pacman { get; }
+        public ICharacter Ghost { get; }
         public ICell[,] Cells { get; private set; }
         private int _totalRows;
         private int _totalCols;
         public bool IsNextCellFood { get; private set; } 
 
-        public Board(IPacman pacman, int totalRows, int totalCols)
+        public Board(ICharacter pacman)
         {
             Pacman = pacman;
-            Ghost = new Ghost(Direction.Up);
-            if (totalRows < 1 || totalCols < 1)
-                throw new ArgumentException(Constants.Constants.ExceptionForRowsAndCols);
-            _totalRows = totalRows;
-            _totalCols = totalCols;
-            Cells = new ICell[totalRows, totalCols];
-            SetUpCells();
-        }
-
-        private void SetUpCells()
-        {
-            for (var i = 0; i < _totalRows; i++)
-            {
-                for (var j = 0; j < _totalCols; j++)
-                {
-                    Cells[i, j] = new Cell(State.Empty);
-                }
-            }
+            Ghost = new Ghost(Direction.Up); 
+            Cells = new ICell[1,1];
         }
 
         public bool IsPacmanInGhostCell()
@@ -63,8 +47,7 @@ namespace PacmanLibrary
         { 
             _totalRows = 6;
             _totalCols = 6;
-            Cells = new ICell[_totalRows, _totalCols];
-            SetUpCells();
+            Cells = new ICell[_totalRows, _totalCols]; 
 
             for (var i = 0; i < _totalRows; i++)
             {
@@ -93,8 +76,7 @@ namespace PacmanLibrary
         { 
             _totalRows = 5;
             _totalCols = 7;
-            Cells = new ICell[_totalRows, _totalCols];
-            SetUpCells();
+            Cells = new ICell[_totalRows, _totalCols]; 
 
             for (var i = 0; i < _totalRows; i++)
             {
@@ -160,7 +142,7 @@ namespace PacmanLibrary
             PlacePacman(newPacmanRow, newPacmanCol);
         }
 
-        private int[] NextCellCoords(Direction direction, IPacman being)
+        private int[] NextCellCoords(Direction direction, ICharacter being)
         {
             var newPacmanRow = being.Row;
             var newPacmanCol = being.Column;
@@ -202,7 +184,7 @@ namespace PacmanLibrary
             return index;
         }
 
-        public bool CanTheyMoveThisDirection(Direction direction, IPacman being)
+        public bool CanTheyMoveThisDirection(Direction direction, ICharacter being)
         {
             var coord = NextCellCoords(direction, being);
 
