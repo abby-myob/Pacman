@@ -8,7 +8,7 @@ namespace PacmanLibrary.BoardLogic
         public Direction Direction { get; private set; }
         public int Row { get; private set; }
         public int Column { get; private set; }
-        public State CurrentCellState { get; private set; }
+        public State CurrentCellState => State.Empty;
         public State CharacterState { get; }
         
 
@@ -29,9 +29,6 @@ namespace PacmanLibrary.BoardLogic
             Column = column;
         }
 
-        public void SetCurrentCellState(State state)
-        {
-            CurrentCellState = state;
-        }
+        public void SetCurrentCellState(State state) { }
     }
 }

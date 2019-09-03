@@ -63,31 +63,6 @@ namespace PacmanTests
                 {new Cell(State.Food), new Cell(State.Food)} 
             };
         }
-        private static ICell[,] CreateLeftAndUpWallCells()
-        {
-            return new ICell[,]
-            {
-                {new Cell(State.Pacman), new Cell(State.Wall)}, 
-                {new Cell(State.Wall), new Cell(State.Wall)} 
-            };
-        }
-        private static ICell[,] CreateRightAndDownWallCells()
-        {
-            return new ICell[,]
-            {
-                {new Cell(State.Wall), new Cell(State.Wall)}, 
-                {new Cell(State.Wall), new Cell(State.Pacman)} 
-            };
-        }
-        private static ICell[,] CreateWallCells()
-        {
-            return new ICell[,]
-            {
-                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
-                {new Cell(State.Wall), new Cell(State.Pacman), new Cell(State.Wall)},
-                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
-            };
-        }
         
         private static void AssertTwoCellArrays(ICell[,] expected, ICell[,] cells)
         {
@@ -100,6 +75,8 @@ namespace PacmanTests
             }
         }
 
+        
+        // Basic Testing for Pacman movement *****************************************************
         [Fact]
         public void MoveCharacter_tests_for_correct_location_of_pacman_when_in_down_direction()
         {
@@ -185,7 +162,7 @@ namespace PacmanTests
         }
         
         
-        // Check Overlapping on Pacman Movement
+        // Check Overlapping on Pacman Movement *****************************************************
         [Fact]
         public void MoveCharacter_tests_for_correct_location_of_pacman_when_in_Left_direction_and_overlaps()
         {
@@ -263,7 +240,7 @@ namespace PacmanTests
             AssertTwoCellArrays(expected, cells); 
         }
         
-        // Check Pacman Movement with walls
+        // Check Pacman Movement with walls *****************************************************
         [Theory]
         [InlineData(Direction.Up)]
         [InlineData(Direction.Down)]
@@ -274,7 +251,12 @@ namespace PacmanTests
             // Arrange  
             Mover.Character.SetLocation(1,1);
             Mover.Character.SetDirection(direction);
-            var cells = CreateWallCells();
+            var cells = new ICell[,]
+            {
+                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Pacman), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
+            };
             var expected = new ICell[,]
             {
                 {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
@@ -289,18 +271,22 @@ namespace PacmanTests
             AssertTwoCellArrays(expected, cells); 
         }
         
-        // Check Pacman Movement with walls overlapping
+        // Check Pacman Movement with walls overlapping *******************************************
         [Theory]
         [InlineData(Direction.Up)]
         [InlineData(Direction.Down)]
         [InlineData(Direction.Right)]
         [InlineData(Direction.Left)]
-        public void MoveCharacter_tests_for_correct_location_of_pacman_when_rightanddown_direction_with_walls_with_overlapping(Direction direction)
+        public void MoveCharacter_tests_for_correct_location_of_pacman_when_rightAndDown_direction_with_walls_with_overlapping(Direction direction)
         {
             // Arrange  
             Mover.Character.SetLocation(1,1);
             Mover.Character.SetDirection(direction);
-            var cells = CreateRightAndDownWallCells();
+            var cells = new ICell[,]
+            {
+                {new Cell(State.Wall), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Pacman)},
+            };
             var expected = new ICell[,]
             {
                 {new Cell(State.Wall), new Cell(State.Wall)},
@@ -323,7 +309,11 @@ namespace PacmanTests
             // Arrange  
             Mover.Character.SetLocation(0,0);
             Mover.Character.SetDirection(direction);
-            var cells = CreateLeftAndUpWallCells();
+            var cells = new ICell[,]
+            {
+                {new Cell(State.Pacman), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Wall)},
+            };
             var expected = new ICell[,]
             {
                 {new Cell(State.Pacman), new Cell(State.Wall)},
@@ -336,6 +326,26 @@ namespace PacmanTests
             // Assert
             AssertTwoCellArrays(expected, cells); 
         }
-
+        
+        // Check Pacman Movement with One Cell *******************************************
+        [Theory]
+        [InlineData(Direction.Up)]
+        [InlineData(Direction.Down)]
+        [InlineData(Direction.Right)]
+        [InlineData(Direction.Left)]
+        public void MoveCharacter_with_level_of_one_cell(Direction direction)
+        {
+            // Arrange  
+            Mover.Character.SetLocation(0,0);
+            Mover.Character.SetDirection(direction);
+            var cells = new ICell[,] {{new Cell(State.Pacman)}};
+            var expected = new ICell[,] {{new Cell(State.Pacman)}};
+            
+            // Act 
+            Mover.MoveCharacter(cells);
+            
+            // Assert
+            AssertTwoCellArrays(expected, cells); 
+        }
     }
 }

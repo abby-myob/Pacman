@@ -80,7 +80,7 @@ namespace PacmanConsole
                     return Direction.Right;
                 default:
                     return Direction.Null;
-            } 
+            }   
         }
 
         public void PrintScore(int score)
