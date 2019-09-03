@@ -14,10 +14,10 @@ namespace PacmanLibrary.BoardLogic
         }
 
         public ICell[,] MoveCharacter(ICell[,] cells)
-        {
-            if (CanCharacterMoveHere(Character.Direction, cells) == false) return cells;
-            
+        { 
             var newCoord = NextCellCoords(Character.Direction, cells); 
+            
+            if (cells[newCoord[0], newCoord[1]].State == State.Wall) return cells;
              
             cells[Character.Row, Character.Column].SetState(Character.CurrentCellState);
 
