@@ -1,4 +1,5 @@
 using PacmanLibrary;
+using PacmanLibrary.BoardLogic;
 using PacmanLibrary.Enums;
 using Xunit;
 

@@ -1,5 +1,6 @@
 using Moq;
 using PacmanLibrary;
+using PacmanLibrary.BoardLogic;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 using Xunit;
@@ -18,7 +19,7 @@ namespace PacmanTests
             var game = new Game(boardMock.Object);
 
             // Assert
-            boardMock.Verify(b => b.Initialise(It.IsAny<int>()), Times.Once);
+            boardMock.Verify(b => b.SetUpLevel(It.IsAny<int>()), Times.Once);
         }
 
         [Fact]
@@ -65,7 +66,7 @@ namespace PacmanTests
             var pacman = new Pacman(Direction.Down);
             var board = new Board(pacman, 20, 20);
             board.PlacePacman(2, 2);
-            board.Initialise(0);
+            board.SetUpLevel(0);
             var game = new Game(board);
             for (var i = 0; i < 20; i++)
             {

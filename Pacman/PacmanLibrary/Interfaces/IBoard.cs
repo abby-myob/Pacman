@@ -4,14 +4,10 @@ namespace PacmanLibrary.Interfaces
 {
     public interface IBoard
     {
-        ICell[,] Cells { get; }
-        ICharacter Pacman { get; }
-        bool IsNextCellFood { get; }
-        bool IsPacmanInGhostCell();
-        void Initialise(int level);
-        void PlacePacman(int row, int col); 
-        void MovePacman();
-        bool CanTheyMoveThisDirection(Direction direction, ICharacter being);
-        void MoveGhost();
+        ICell[,] Cells { get; } 
+        void SetUpLevel(int level);
+        void BoardTick(); 
+        void SetPacmanDirection(Direction up);
+        Direction GetPacmanDirection(); 
     }
 }

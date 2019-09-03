@@ -1,7 +1,7 @@
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 
-namespace PacmanLibrary
+namespace PacmanLibrary.BoardLogic
 {
     public class Cell : ICell
     {

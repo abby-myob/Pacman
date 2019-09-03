@@ -1,4 +1,5 @@
 ﻿using PacmanLibrary;
+using PacmanLibrary.BoardLogic;
 using PacmanLibrary.Enums;
 
 namespace PacmanConsole
@@ -7,7 +8,7 @@ namespace PacmanConsole
     {
         private static void Main()
         {
-            var game = new Game(new Board(new Pacman(Direction.Up)));
+            var game = new Game(new Board(new LevelCreator(), new Mover(new Pacman(Direction.Down))));
             
             game.Play(new ConsoleResponseManager());
         }

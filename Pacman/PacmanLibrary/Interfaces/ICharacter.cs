@@ -8,6 +8,7 @@ namespace PacmanLibrary.Interfaces
         int Row { get; }
         int Column { get; }
         State CurrentCellState { get; }
+        State CharacterState { get; }
         void SetDirection(Direction newDirection);
         void SetLocation(int row, int column);
         void SetCurrentCellState(State state);
