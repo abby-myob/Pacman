@@ -2,7 +2,6 @@ using PacmanLibrary.BoardLogic;
 using PacmanLibrary.Enums;
 using PacmanLibrary.Interfaces;
 using Xunit;
-using Xunit.Sdk;
 
 namespace PacmanTests
 {
@@ -62,6 +61,22 @@ namespace PacmanTests
             {
                 {new Cell(State.Pacman), new Cell(State.Food)}, 
                 {new Cell(State.Food), new Cell(State.Food)} 
+            };
+        }
+        private static ICell[,] CreateLeftAndUpWallCells()
+        {
+            return new ICell[,]
+            {
+                {new Cell(State.Pacman), new Cell(State.Wall)}, 
+                {new Cell(State.Wall), new Cell(State.Wall)} 
+            };
+        }
+        private static ICell[,] CreateRightAndDownWallCells()
+        {
+            return new ICell[,]
+            {
+                {new Cell(State.Wall), new Cell(State.Wall)}, 
+                {new Cell(State.Wall), new Cell(State.Pacman)} 
             };
         }
         private static ICell[,] CreateWallCells()
@@ -247,7 +262,80 @@ namespace PacmanTests
             // Assert
             AssertTwoCellArrays(expected, cells); 
         }
-
+        
+        // Check Pacman Movement with walls
+        [Theory]
+        [InlineData(Direction.Up)]
+        [InlineData(Direction.Down)]
+        [InlineData(Direction.Right)]
+        [InlineData(Direction.Left)]
+        public void MoveCharacter_tests_for_correct_location_of_pacman_when_any_direction_with_walls(Direction direction)
+        {
+            // Arrange  
+            Mover.Character.SetLocation(1,1);
+            Mover.Character.SetDirection(direction);
+            var cells = CreateWallCells();
+            var expected = new ICell[,]
+            {
+                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Pacman), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Wall), new Cell(State.Wall)},
+            };
+            
+            // Act 
+            Mover.MoveCharacter(cells);
+            
+            // Assert
+            AssertTwoCellArrays(expected, cells); 
+        }
+        
+        // Check Pacman Movement with walls overlapping
+        [Theory]
+        [InlineData(Direction.Up)]
+        [InlineData(Direction.Down)]
+        [InlineData(Direction.Right)]
+        [InlineData(Direction.Left)]
+        public void MoveCharacter_tests_for_correct_location_of_pacman_when_rightanddown_direction_with_walls_with_overlapping(Direction direction)
+        {
+            // Arrange  
+            Mover.Character.SetLocation(1,1);
+            Mover.Character.SetDirection(direction);
+            var cells = CreateRightAndDownWallCells();
+            var expected = new ICell[,]
+            {
+                {new Cell(State.Wall), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Pacman)},
+            };
+            
+            // Act 
+            Mover.MoveCharacter(cells);
+            
+            // Assert
+            AssertTwoCellArrays(expected, cells); 
+        }
+        [Theory]
+        [InlineData(Direction.Up)]
+        [InlineData(Direction.Down)]
+        [InlineData(Direction.Right)]
+        [InlineData(Direction.Left)]
+        public void MoveCharacter_tests_for_correct_location_of_pacman_when_leftAndUp_direction_with_walls_with_overlapping(Direction direction)
+        {
+            // Arrange  
+            Mover.Character.SetLocation(0,0);
+            Mover.Character.SetDirection(direction);
+            var cells = CreateLeftAndUpWallCells();
+            var expected = new ICell[,]
+            {
+                {new Cell(State.Pacman), new Cell(State.Wall)},
+                {new Cell(State.Wall), new Cell(State.Wall)},
+            };
+            
+            // Act 
+            Mover.MoveCharacter(cells);
+            
+            // Assert
+            AssertTwoCellArrays(expected, cells); 
+        }
 
     }
 }
