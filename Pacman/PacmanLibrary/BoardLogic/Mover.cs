@@ -15,10 +15,7 @@ namespace PacmanLibrary.BoardLogic
 
         public ICell[,] MoveCharacter(ICell[,] cells)
         {
-            if (CanCharacterMoveHere(Character.Direction, cells) == false)
-            {
-                return cells;
-            }
+            if (CanCharacterMoveHere(Character.Direction, cells) == false) return cells;
             
             var newCoord = NextCellCoords(Character.Direction);
 
@@ -78,11 +75,11 @@ namespace PacmanLibrary.BoardLogic
             if (isRow)
             {
                 if (index >= cells.GetLength(0)) return 0;
-                if (index < 0) return cells.GetLength(1) - 1;
+                if (index < 0) return cells.GetLength(0) - 1;
             }
             else
             {
-                if (index >= cells.GetLength(0)) return 0;
+                if (index >= cells.GetLength(1)) return 0;
                 if (index < 0) return cells.GetLength(1) - 1;
             }
 

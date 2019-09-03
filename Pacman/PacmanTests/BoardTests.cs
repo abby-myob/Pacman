@@ -8,20 +8,9 @@ namespace PacmanTests
 {
     public class BoardTests
     {
-        [Fact]
-        public void When_creation_of_board_object_all_cells_should_be_empty()
+        public BoardTests()
         {
-            // Arrange
-            var pacman = new Pacman(Direction.Up);
-
-            // Act
-            var board = new Board(pacman, 2, 2);
-
-            // Assert
-            foreach (var cell in board.Cells)
-            {
-                Assert.Equal(State.Empty, cell.State);
-            }
+            
         }
 
         [Theory]

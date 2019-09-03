@@ -26,7 +26,7 @@ namespace PacmanLibrary.BoardLogic
             {
                 {1, 0, 1, 1, 0, 1},
                 {1, 0, 0, 0, 0, 1}, 
-                {1, 0, 2, 0, 0, 1}, 
+                {1, 0, 0, 2, 0, 1}, 
                 {1, 0, 1, 1, 0, 1},  
             };
 
@@ -55,22 +55,22 @@ namespace PacmanLibrary.BoardLogic
             var cols = level.GetLength(1);
             var cells = new ICell[rows, cols];
 
-            for (var i = 0; i < rows; i++)
+            for (var row = 0; row < rows; row++)
             {
-                for (var j = 0; j < cols; j++)
+                for (var col = 0; col < cols; col++)
                 {
-                    switch (level[i, j])
+                    switch (level[row, col])
                     {
                         case 0:
-                            cells[i, j] = new Cell(State.Food);
+                            cells[row, col] = new Cell(State.Food);
                             break;
                         case 1:
-                            cells[i, j] = new Cell(State.Wall);
+                            cells[row, col] = new Cell(State.Wall);
                             break;
                         case 2:
-                            cells[i, j] = new Cell(State.Pacman);
-                            PacmanCol = i;
-                            PacmanRow = j;
+                            cells[row, col] = new Cell(State.Pacman);
+                            PacmanRow = row;
+                            PacmanCol = col;
                             break;
                     }
                 }

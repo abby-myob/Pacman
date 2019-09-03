@@ -41,7 +41,7 @@ namespace PacmanLibrary
                 UpdatePacmanDirection();
             }
 
-            aTimer.Stop();
+            //aTimer.Stop();
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
