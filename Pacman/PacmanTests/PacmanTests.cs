@@ -12,7 +12,7 @@ namespace PacmanTests
         [InlineData(Direction.Down, Direction.Down)]
         [InlineData(Direction.Up, Direction.Left)]
         [InlineData(Direction.Right, Direction.Right)]
-        public void check_setDirection_updates_pacmans_direction_property(Direction init, Direction change)
+        public void check_setDirection_updates_pacman_direction_property(Direction init, Direction change)
         {
             // Arrange
             var pacman = new Pacman(init);

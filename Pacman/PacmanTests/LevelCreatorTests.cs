@@ -6,7 +6,7 @@ namespace PacmanTests
 {
     public class LevelCreatorTests
     {
-        private LevelCreator LevelCreator { get; }  
+        private LevelCreator LevelCreator { get; }
 
         public LevelCreatorTests()
         {
@@ -24,7 +24,7 @@ namespace PacmanTests
             };
             var intArray = new[,]
             {
-                {0, 0, 1}, 
+                {0, 0, 1},
                 {0, 2, 1}
             };
 
