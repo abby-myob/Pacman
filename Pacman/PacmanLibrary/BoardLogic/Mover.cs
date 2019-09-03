@@ -5,13 +5,13 @@ using PacmanLibrary.Interfaces;
 namespace PacmanLibrary.BoardLogic
 {
     public class Mover : IMover
-    { 
-        public ICharacter Character { get; } 
+    {
+        public ICharacter Character { get; }
 
         public Mover(ICharacter character)
         {
             Character = character;
-        } 
+        }
 
         public ICell[,] MoveCharacter(ICell[,] cells)
         {
@@ -22,27 +22,21 @@ namespace PacmanLibrary.BoardLogic
             var newPacmanRow = CheckInBounds(true, newCoord[0], cells);
             var newPacmanCol = CheckInBounds(false, newCoord[1], cells);
             
+            // only works for pacman at this stage
+            cells[Character.Row, Character.Column].SetState(State.Empty);
 
-            switch (Character.CharacterState)
-            { 
-                case State.Pacman:
-                    cells[Character.Row, Character.Column].SetState(State.Empty);
-                    break;
-                case State.Ghost:
-                    cells[Character.Row, Character.Column].SetState(Character.CurrentCellState);
-                    break;
-            }
- 
-            cells = PlaceCharacter(newPacmanRow, newPacmanCol, cells); 
-            
+            cells = PlaceCharacter(newPacmanRow, newPacmanCol, cells);
+
             return cells;
         }
 
         public bool CanCharacterMoveHere(Direction direction, ICell[,] cells)
         {
             var coord = NextCellCoords(direction);
-            return cells[coord[0], coord[1]].State != State.Wall;
-        } 
+            var row = CheckInBounds(true, coord[0], cells);  // THERES DUPLICATION HERE BRO
+            var col = CheckInBounds(false, coord[1], cells);
+            return cells[row, col].State != State.Wall;
+        }
 
         private int[] NextCellCoords(Direction direction)
         {
@@ -69,7 +63,7 @@ namespace PacmanLibrary.BoardLogic
 
             return new[] {newCharacterRow, newCharacterColumn};
         }
-        
+
         private int CheckInBounds(bool isRow, int index, ICell[,] cells)
         {
             if (isRow)
@@ -90,11 +84,11 @@ namespace PacmanLibrary.BoardLogic
         {
             if (row < 0 || row >= cells.GetLength(0) || column < 0 || column >= cells.GetLength(1))
                 throw new ArgumentOutOfRangeException(Constants.Constants.ExceptionForPlacingPacmanOffTheBoard);
-            
+
             Character.SetLocation(row, column);
-            Character.SetCurrentCellState(cells[row, column].State);
+//            Character.SetCurrentCellState(cells[row, column].State);
             cells[row, column].SetState(Character.CharacterState);
-            
+
             return cells;
         }
     }

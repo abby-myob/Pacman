@@ -49,7 +49,7 @@ namespace PacmanLibrary.BoardLogic
             return GenerateCellsArrayForLevel(level);
         }
 
-        private ICell[,] GenerateCellsArrayForLevel(int[,] level)
+        public ICell[,] GenerateCellsArrayForLevel(int[,] level)
         {
             var rows = level.GetLength(0);
             var cols = level.GetLength(1);

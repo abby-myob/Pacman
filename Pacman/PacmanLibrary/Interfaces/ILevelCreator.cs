@@ -5,5 +5,6 @@ namespace PacmanLibrary.Interfaces
         int PacmanRow { get; }
         int PacmanCol { get; }
         ICell[,] CreateLevel(int level);
+        ICell[,] GenerateCellsArrayForLevel(int[,] level);
     }
 }
